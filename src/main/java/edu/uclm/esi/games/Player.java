@@ -17,6 +17,8 @@ public class Player {
 	private String pwd;
 	@JsonIgnore
 	private Match currentMatch;
+	@Bsonable
+	private byte[] foto;
 	
 	public String getUserName() {
 		return userName;
@@ -64,5 +66,15 @@ public class Player {
 
 	public Match move(int[] coordinates) throws Exception {
 		return this.currentMatch.move(this, coordinates);
+	}
+
+	public static Player solicitarToken(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setFoto(byte[] bytes) {
+		this.foto=bytes;
+		
 	}
 }

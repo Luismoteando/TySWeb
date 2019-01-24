@@ -3,9 +3,12 @@ package edu.uclm.esi.web.ws;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -15,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
+import edu.uclm.esi.mongolabels.dao.MongoBroker;
 import edu.uclm.esi.web.Manager;
 
 @Component
@@ -31,6 +35,22 @@ public class WSServer extends TextWebSocketHandler {
 			sessionsByPlayer.remove(userName);
 		}
 		sessionsByPlayer.put(userName, session);
+	}
+	
+	@Override
+	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+		Player player = (Player) session.getAttributes().get("player");
+		byte[] bytes = message.getPayload().array();
+		player.setFoto(bytes);
+		BsonDocument criterion = new BsonDocument();
+		criterion.append("userName",  new BsonString(player.getUserName()));
+		MongoBroker.get().delete("player", criterion);
+		try {
+			MongoBroker.get().insert(player);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

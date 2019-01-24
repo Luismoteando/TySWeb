@@ -37,13 +37,15 @@
 			<article class="fondo">
 				<h3>Regístrate</h3>
 				<div>
-					<span class="icon-user"></span><input class="inp" type="email"
-						id="lEmail" placeholder="Correo electrónico"><br> <span
-						class="icon-mail2"></span><input class="inp" type="text"
-						id="lUserName" placeholder="Usuario"><br> <span
-						class="icon-key"></span><input class="inp" id="lPwd1"
-						placeholder="Contraseña"><br> <span class="icon-key"></span><input
+					<span class="icon-mail2"></span><input class="inp" type="email"
+						id="lEmail" placeholder="Correo electrónico"><br> 
+					<span class="icon-user"></span><input class="inp" type="text"
+						id="lUserName" placeholder="Usuario"><br>
+					<span class="icon-key"></span><input class="inp" id="lPwd1"
+						placeholder="Contraseña"><br>
+					<span class="icon-key"></span><input
 						class="inp" id="lPwd2" placeholder="Repita su contraseña"><br>
+					<span class="icon-file-picture"></span><input type = "file" id="foto"><button onclick="subirFoto()">Subir Foto</button><br>
 					<button class="boton" onclick="register()">Registrarse</button>
 				</div>
 			</article>
@@ -97,6 +99,22 @@
 					sessionStorage.userName = respuesta.userName;
 				}
 			});
+		}
+
+		function subirFoto() {
+			var file = foto.files[0];
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var blob = new Blob(reader.result);
+				var blobReader = new FileReader();
+				blobReader.onload = function(event) {
+					var buffer = event.target.result;
+					chat.send(buffer);
+				};
+				blobReader.readAsArrayBuffer(blob);
+			}
+			reader.readAsArrayBuffer(file);
 		}
 	</script>
 </body>

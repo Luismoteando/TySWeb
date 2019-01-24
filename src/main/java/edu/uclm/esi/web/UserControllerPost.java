@@ -37,6 +37,11 @@ public class UserControllerPost {
 		return player;
 	}
 	
+	@RequestMapping(value="/solicitarToken", method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	  public Player solicitarToker(HttpSession session, String userName) throws Exception {
+	    return Player.solicitarToken(userName);
+	  }
+	
 	@RequestMapping(value= {"/joinGame", "/post/joinGame"}, method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE) 
 	public Match joinGamePost(HttpSession session, @RequestBody String gameName) throws Exception {
 		Player player=(Player) session.getAttribute("player");
