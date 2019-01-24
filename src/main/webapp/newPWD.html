@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Restablecer contraseña</title>
+<link rel="stylesheet" href="Resources/styleRestablecer.css">
+<link rel="stylesheet" href="Resources/font.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+	<div class="contenedor" data-ng-app="RestablecerApp"
+		data-ng-controller="RestablecerController">
+
+		<header>
+			<h1 class="title">Restablecer contraseña</h1>
+		</header>
+
+		<div class="restablecer">
+			<article class="fondo" style="width: 50%; height: 350px;">
+				<h3>Restablezca su contraseña</h3>
+				<div>
+					<span class="icon-key"></span><input class="inp" type="text"
+						id="lEmail" placeholder="Nueva Contraseña" value=""
+						name="mailTo"><br>
+						<span class="icon-key"></span><input class="inp" type="text"
+						id="lEmail" placeholder="Repita Contraseña" value=""
+						name="mailTo"><br>
+						<input id="sendEmailBtn"
+						onclick="newPWD()" value="Reestablecer" />
+				</div>
+			</article>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		function restablecer() {
+			var p = {
+				userName : lUserName.value,
+				pwd : lPwd.value
+			};
+			$.post("/restablecer", p, function(respuesta, estado) {
+				if (estado == "success") {
+					window.location = "indexppt.html"
+					sessionStorage.userName = respuesta.userName;
+				}
+			});
+		}
+	</script>
+</body>
+</html>

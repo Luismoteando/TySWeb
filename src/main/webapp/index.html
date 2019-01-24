@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" href="Resources/styleLogin.css">
+<link rel="stylesheet" href="Resources/font.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="face.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	
+</head>
+<body>
+<div class="contenedor" data-ng-app="LoginApp"
+		data-ng-controller="LoginController">
+
+		<header>
+			<h1 class="title">Tecnologías y Sistemas Web</h1>
+			<a href="register.html" style="margin-left:90%;">Regístrate</a>
+		</header>
+
+		<div class="login" style="margin-bottom: 0px;">
+			<article class="fondo">
+				<img src="Resources/logo.jpg" alt="User">
+				<h3>Inicio de Sesión</h3>
+				<div>
+					<span class="icon-user"></span><input class="inp" type="text"
+						id="lUserName" placeholder="Usuario" value=""><br> <span
+						class="icon-key"></span><input class="inp" type="password"
+						id="lPwd" placeholder="Contraseña" value=""><br> <a
+						href="resetpassword.html" class="he">He olvidado mi contraseña</a>
+					<button class="boton" onclick="login()">Iniciar sesión</button>
+				</div>
+				<a href="#" id="login" style="margin-top: 10px;" class="btn btn-primary">Iniciar sesión con Facebook</a>
+			</article>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+	</script>
+
+
+
+<script>
+	// Load the SDK asynchronously
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	 </script>
+
+
+	<script>
+		function login() {
+			var p = {
+				userName : lUserName.value,
+				pwd : lPwd.value
+			};
+			$.post("/login", p, function(respuesta, estado) {
+				if (estado == "success") {
+					window.location = "elegirJuego.html"
+					sessionStorage.userName = respuesta.userName;
+				}
+			});
+			
+		}
+	</script>
+</body>
+</html>	

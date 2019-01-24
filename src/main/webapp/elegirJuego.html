@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Elegir Juego</title>
+<link rel="stylesheet" href="Resources/styleGame.css">
+<link rel="stylesheet" href="Resources/font.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script
+	src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script >
+	$(document).ready(function(){
+		document.getElementById("nombreU").innerHTML = sessionStorage.getItem("name");
+		//document.getElementById("imgU").innerHTML = sessionStorage.getItem("img");
+		
+		var id = sessionStorage.getItem('id');
+		;
+		$('#imgU').attr('src','http://graph.facebook.com/'+id+'/picture?type=large');
+		//document.getElementById('imgU').src = "data:image/png;base64," + dataImage;
+	
+	})
+	</script>
+</head>
+<body cz-shortcut-listen="true">
+	<div class="contenedor" data-ng-app="GameApp"
+		data-ng-controller="GameController">
+
+		<header>
+			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías y Sistemas Web</h1>
+			<img id="imgU" alt="User" width="40" height="40" style="margin-left: 97%;margin-top: -37px;">
+			<p id="nombreU" style="margin-left: 80%;margin-top: -30px;"> Nombre de Usuario </p>
+		</header>
+
+		<div class="game" style="width: 40%;">
+			<article class="fondo" style="margin-top: 50px;">
+				<h3>Elige un juego:</h3>
+
+				<div class="row" style="width: 100%;">
+					<div class="col-md-4" style="padding-right:0px;">
+						<img type="image" src="Resources/piedra_papel_tijera.png" style="width: 60%;margin-top: 25px;border: 0px;margin-left: 20px;">
+					</div>
+					<div class="col-md-8" style="padding-left:0px;">
+						<button class="boton" onclick="juego1()">PIEDRA, PAPEL, TIJERA</button>
+					</div>
+				</div>
+				
+				<div class="row" style="width: 100%;">
+					<div class="col-md-4" style="padding-right:0px;">
+						<img type="image" src="Resources/letras.png" style="border-radius:0px;width: 60%;margin-top: 25px;border: 0px;margin-left: 20px;">
+					</div>
+					<div class="col-md-8" style="padding-left:0px;">
+						<button class="boton" onclick="juego2()">DESTAPE DE LETRAS</button>
+					</div>
+				</div>
+
+			</article>
+		</div>
+	</div>
+	
+	<script>
+		function juego1() {
+			var p = {
+				userName : lUserName.value,
+				pwd : lPwd.value
+			};
+			window.location = "indexppt.html"
+			
+		}
+	</script>
+</body>
+</html>

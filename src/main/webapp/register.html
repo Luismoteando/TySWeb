@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Registrarse</title>
+<link rel="stylesheet" href="Resources/styleRegistrarse.css">
+<link rel="stylesheet" href="Resources/font.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+	<div class="contenedor" data-ng-app="RegistrarseApp"
+		data-ng-controller="RegistrarseController">
+
+		<header>
+			<h1 class="title">Registrarse</h1>
+		</header>
+
+		<!-- Tab links -->
+		<div class="tab-registrarse">
+			<button class="tablinks active" onclick="action(event,'Registrarse')">Registrarse</button>
+			<button class="tablinks" onclick="action(event,'Facebook')">
+				<i class="icon-facebook2"></i>Entrar con Facebook
+			</button>
+			<button class="tablinks" onclick="action(event,'Google')">
+				<i class="icon-google2"></i>Entrar con Google
+			</button>
+		</div>
+
+		<!-- Tab content -->
+
+		<div id="Registrarse" class="tabcontent" style="display: block">
+			<article class="fondo">
+				<h3>Regístrate</h3>
+				<div>
+					<span class="icon-user"></span><input class="inp" type="email"
+						id="lEmail" placeholder="Correo electrónico"><br> <span
+						class="icon-mail2"></span><input class="inp" type="text"
+						id="lUserName" placeholder="Usuario"><br> <span
+						class="icon-key"></span><input class="inp" id="lPwd1"
+						placeholder="Contraseña"><br> <span class="icon-key"></span><input
+						class="inp" id="lPwd2" placeholder="Repita su contraseña"><br>
+					<button class="boton" onclick="register()">Registrarse</button>
+				</div>
+			</article>
+		</div>
+
+		<div id="Facebook" class="tabcontent">
+			<article class="fondo"></article>
+		</div>
+
+		<div id="Google" class="tabcontent">
+			<article class="fondo"></article>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		function action(evt, method) {
+			// Declare all variables
+			var i, tabcontent, tablinks;
+
+			// Get all elements with class="tabcontent" and hide them
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+
+			// Get all elements with class="tablinks" and remove the class "active"
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(
+						" active", "");
+			}
+
+			// Show the current tab, and add an "active" class to the button that opened the tab
+
+			document.getElementById(method).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		function register() {
+			var p = {
+				userName : lUserName.value,
+				pwd1 : lPwd2.value,
+				pwd2 : lPwd2.value,
+				email : lEmail.value,
+			};
+			$.post("/register", p, function(respuesta, estado) {
+				if (estado == "success") {
+					window.location = "index.html"
+					sessionStorage.userName = respuesta.userName;
+				}
+			});
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
