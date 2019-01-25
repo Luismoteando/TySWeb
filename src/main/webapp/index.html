@@ -3,6 +3,8 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="google-signin-client_id"
+	content="699585083807-6r8038oemehpthu119v6sl37ledla64u.apps.googleusercontent.com">
 <title>Login</title>
 <link rel="stylesheet" href="Resources/styleLogin.css">
 <link rel="stylesheet" href="Resources/font.css">
@@ -11,24 +13,27 @@
 	rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="face.js"></script>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="face.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-	
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 </head>
 <body>
-<div class="contenedor" data-ng-app="LoginApp"
+	<div class="contenedor" data-ng-app="LoginApp"
 		data-ng-controller="LoginController">
 
 		<header>
 			<h1 class="title">Tecnologías y Sistemas Web</h1>
-			<a href="register.html" style="margin-left:90%;">Regístrate</a>
+			<a href="register.html" style="margin-left: 90%;">Regístrate</a>
 		</header>
 
 		<div class="login" style="margin-bottom: 0px;">
@@ -43,27 +48,32 @@
 						href="resetpassword.html" class="he">He olvidado mi contraseña</a>
 					<button class="boton" onclick="login()">Iniciar sesión</button>
 				</div>
-				<a href="#" id="login" style="margin-top: 10px;" class="btn btn-primary">Iniciar sesión con Facebook</a>
+				<br> <a href="#" id="login" style="margin-top: 10px;"
+					class="btn btn-primary">Iniciar sesión con Facebook</a><br>
+				<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			</article>
 		</div>
 	</div>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+		
 	</script>
 
 
 
-<script>
-	// Load the SDK asynchronously
-	  (function(d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id)) return;
-	    js = d.createElement(s); js.id = id;
-	    js.src = "//connect.facebook.net/en_US/sdk.js";
-	    fjs.parentNode.insertBefore(js, fjs);
-	  }(document, 'script', 'facebook-jssdk'));
-	 </script>
+	<script>
+		// Load the SDK asynchronously
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 
 
 	<script>
@@ -78,8 +88,30 @@
 					sessionStorage.userName = respuesta.userName;
 				}
 			});
-			
+
+		}
+
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			registrarOLoguear(profile.getId(), profile.getEmail(), profile
+					.getName());
+			window.location = "elegirJuego.html";
+		}
+
+		function registrarOLoguear(idGoogle, email, name) {
+			var req = new XMLHttpRequest();
+			req.open("POST", "/registrarOLoguear");
+			req.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
+			req.onreadystate = function() {
+				if (req.readyState == 4 && req.status == 200) {
+					window.location = "elegirJuego.html";
+				}
+			}
+			var p = "idGoogle=" + idGoogle + "&nombre=" + name + "&email="
+					+ email;
+			req.send(p);
 		}
 	</script>
 </body>
-</html>	
+</html>

@@ -29,11 +29,21 @@ public class UserControllerPost {
 		return player;
 	}
 	
-	
 	@RequestMapping(value="/login", method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Player loginPost(HttpSession session, String userName, String pwd) throws Exception {
 		Player player=Player.identify(userName, pwd);
 		session.setAttribute("player", player);
+		return player;
+	}
+	
+	@RequestMapping(value="/registrarOLoguear", method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE) 
+	public Player loginConGoogle(HttpSession session, String idGoogle, String nombre, String email) throws Exception {
+		Player player = null;
+		try {
+			player = Player.identifyGoogle(idGoogle, nombre, email);
+		} catch(Exception e) {
+			player = Player.registerGoogle(idGoogle, nombre, email);
+		}
 		return player;
 	}
 	
