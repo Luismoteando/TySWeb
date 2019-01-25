@@ -48,8 +48,11 @@
 						href="resetpassword.html" class="he">He olvidado mi contraseña</a>
 					<button class="boton" onclick="login()">Iniciar sesión</button>
 				</div>
-				<br> <a href="#" id="login" style="margin-top: 10px;"
-					class="btn btn-primary">Iniciar sesión con Facebook</a><br>
+				<br>
+				<fb:login-button scope="public_profile,email"
+					onlogin="checkLoginState();">
+				</fb:login-button>
+				<br>
 				<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			</article>
 		</div>
@@ -62,17 +65,36 @@
 
 
 
+
 	<script>
-		// Load the SDK asynchronously
+		/*window.fbAsyncInit = function() {
+			FB.init({
+				appId : '414931005914695',
+				cookie : true,
+				xfbml : true,
+				version : 'v3.2'
+			});
+
+			FB.AppEvents.logPageView();
+
+		};*/
+
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
+			if (d.getElementById(id)) {
 				return;
+			}
 			js = d.createElement(s);
 			js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
+		
+		function checkLoginState() {
+			  FB.getLoginStatus(function(response) {
+			    alert(response);
+			  });
+			}
 	</script>
 
 

@@ -10,6 +10,7 @@
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
@@ -27,22 +28,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Luismi/.m2/repository/org/mongodb/bson/3.6.4/bson-3.6.4.jar" sourcepath="/Users/Luismi/.m2/repository/org/mongodb/bson/3.6.4/bson-3.6.4-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/asg_9/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar" sourcepath="C:/Users/asg_9/.p2/pool/plugins/org.junit.source_4.12.0.v201504281640.jar">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.mongodb"/>
-			<attribute name="maven.artifactId" value="bson"/>
-			<attribute name="maven.version" value="3.6.4"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Luismi/.m2/repository/org/mongodb/mongo-java-driver/3.6.4/mongo-java-driver-3.6.4.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.mongodb"/>
-			<attribute name="maven.artifactId" value="mongo-java-driver"/>
-			<attribute name="maven.version" value="3.6.4"/>
-			<attribute name="maven.scope" value="compile"/>
+			<attribute name="javadoc_location" value="http://junit.org/junit4/javadoc/latest/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
