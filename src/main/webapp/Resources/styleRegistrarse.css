@@ -1,4 +1,4 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 	font-family: Comfortaa, cursive;
@@ -15,7 +15,7 @@
 	height: 860px;
 }
 
-header{
+header {
 	width: 100%;
 	height: 50px;
 	color: #fff;
@@ -27,13 +27,13 @@ header{
 	background-color: rgba(0, 0, 0, .3)
 }
 
-header h1{
+header h1 {
 	margin-left: 30px;
 	font-family: Indie Flower, cursive;
 	font-size: 30px;
 }
 
-header a{
+header a {
 	margin-right: 30px;
 	text-align: center;
 	text-decoration: none;
@@ -42,11 +42,11 @@ header a{
 	transition: all ease 300ms;
 }
 
-header a:hover{
-  color: rgb(180, 210, 212);
+header a:hover {
+	color: rgb(180, 210, 212);
 }
 
-.tab-registrarse{
+.tab-registrarse {
 	overflow: hidden;
 	background-color: inherit;
 	width: 607px;
@@ -56,13 +56,13 @@ header a:hover{
 .tab-registrarse button {
 	background-color: inherit;
 	font-size: 15px;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 0px 16px 5px;
-    transition: 0.3s;
-    width: 202.33px;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 0px 16px 5px;
+	transition: 0.3s;
+	width: 202.33px;
 }
 
 .tab-registrarse button:hover {
@@ -71,150 +71,191 @@ header a:hover{
 }
 
 .tab-registrarse button.active {
-    background-color: rgba(0, 0, 0, .3);
-    border-radius: 20px;
+	background-color: rgba(0, 0, 0, .3);
+	border-radius: 20px;
 }
 
 .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border-top: none;
+	display: none;
+	padding: 6px 12px;
+	border-top: none;
 }
 
-.login{
-  margin-top: 130px;
-  margin-bottom: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40%;
-  height: 100%;
+.login {
+	margin-top: 130px;
+	margin-bottom: 250px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 40%;
+	height: 100%;
 }
 
-.fondo{
-  width: 607px;
-  height: 500px;
-  background-color: rgba(0, 0, 0, 0.3);
-  margin:0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  border-radius: 5px;
+.fondo {
+	width: 607px;
+	height: 500px;
+	background-color: rgba(0, 0, 0, 0.3);
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	border-radius: 5px;
 }
 
-.fondo img{
-  margin-top: -75px;
-  margin-bottom: 40px;
-  width: 50%;
-  border-radius: 30%;
-  border: solid #fff 2px;
+.fondo h3 {
+	color: #fff;
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 50px;
+	margin-top: 20px;
 }
 
-.fondo h3{
-  color: #fff;
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 50px;
-  margin-top: 20px;
+.fondo form {
+	width: 382px;
 }
 
-.fondo form{
-  width: 382px;
+.fondo form span {
+	margin-right: 0px;
+	background-color: rgba(255, 255, 255, .6);
+	color: #000;
+	border: solid 7px rgba(255, 255, 255, .01);
+	border-bottom: solid 9.5px rgba(255, 255, 255, .01);
+	border-top: solid 9px rgba(255, 255, 255, .01);
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
-.fondo form span{
-  margin-right:0px;
-  background-color: rgba(255, 255, 255,.6);
-  color: #000;
-  border:solid 7px rgba(255, 255, 255,.01);
-  border-bottom: solid 9.5px rgba(255, 255, 255,.01);
-  border-top: solid 9px rgba(255, 255, 255,.01);
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+.inp {
+	box-shadow: 0;
+	border: 0;
+	background-color: rgba(255, 255, 255, .1);
+	width: 90%;
+	margin-bottom: 35px;
+	height: 30px;
+	border: solid 2px rgba(255, 255, 255, .5);
+	font-size: 20px;
+	color: #fff;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	text-align: right;
+	transition: all 250ms ease;
 }
 
-.inp{
-  box-shadow: 0;
-  border: 0;
-  background-color: rgba(255, 255, 255, .1);
-  width: 90%;
-  margin-bottom: 35px;
-  height: 30px;
-  border: solid 2px rgba(255,255,255,.5);
-  font-size: 20px;
-  color: #fff;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  text-align: right;
-  transition: all 250ms ease;
+.fondo form .inp:focus {
+	outline: 0px;
+	background-color: rgba(255, 255, 255, .6);
+	border: solid 2px rgba(255, 255, 255, .01);
+	color: #000;
 }
 
-.fondo form .inp:focus{
-  outline:0px;
-  background-color: rgba(255, 255, 255, .6);
-  border: solid 2px rgba(255,255,255,.01);
-  color: #000;
+.boton {
+    width: 100%;
+    height: 30px;
+    font-size: 22px;
+    border: 0;
+    text-align: center;
+    background: rgba(255, 0, 0, 0.0);
+    border-bottom: solid 1px #fff;
+    color: #fff;
+    margin-top: 40px;
+    transition: all 200ms ease;
 }
 
-.boton{
-  width: 100%;
-  height: 30px;
-  font-size: 22px;
-  border: 0;
-  text-align: center;
-  background: rgba(255, 0, 0, 0.0);
-  border-bottom: solid 1px #fff;
-  color: #fff;
-  margin-top: 50px;
-  transition: all 200ms ease;
+.boton:hover {
+	width: 120%;
+	margin-left: -10%;
 }
 
-.boton:hover{
-  width: 120%;
-  margin-left: -10%;
+.boton:active {
+	background-color: rgba(255, 255, 255, 0.2);
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
 }
 
-.boton:active{
-  background-color: rgba(255, 255, 255,0.2);
-  outline: 0;
-  border: 0;
-  border-radius: 5px;
+.boton:focus {
+	background-color: rgba(255, 255, 255, 0.2);
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
 }
 
-.boton:focus{
-  background-color: rgba(255, 255, 255,0.2);
-  outline: 0;
-  border: 0;
-  border-radius: 5px;
+.he {
+	text-decoration: none;
+	text-align: right;
+	color: #fff;
+	font-size: 18px;
+	transition: all 300ms ease;
 }
 
-.he{
-  text-decoration: none;
-  text-align: right;
-  color: #fff;
-  font-size: 18px;
-  transition: all 300ms ease;
+.he:hover {
+	color: rgb(184, 203, 214);
 }
 
-.he:hover{
-  color: rgb(184, 203, 214);
+.boton:hover {
+	border: 120%;
 }
 
-.boton:hover{
-  border: 120%;
+.boton2 {
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    text-align: center;
+    background: rgba(255, 0, 0, 0.0);
+    border-bottom: solid 1px #fff;
+    color: #fff;
+    margin-top: 0px;
+    transition: all 200ms ease;
+}
+
+.boton2:hover {
+	width: 120%;
+	margin-left: -10%;
+}
+
+.boton2:active {
+	background-color: rgba(255, 255, 255, 0.2);
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
+}
+
+.boton2:focus {
+	background-color: rgba(255, 255, 255, 0.2);
+	outline: 0;
+	border: 0;
+	border-radius: 5px;
+}
+
+.boton2:hover {
+	border: 120%;
 }
 
 #overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  cursor: pointer;
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 2;
+	cursor: pointer;
+}
+
+#avatars {
+	width: 500px;
+	position: absolute;
+	left: 45%;
+	top: 50%;
+	margin: -100px 0 0 -150px;
+}
+
+#avatars img {
+	width: 50%;
+	margin: 20px;
 }

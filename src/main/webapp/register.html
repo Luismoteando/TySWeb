@@ -9,7 +9,10 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
 	rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
@@ -46,49 +49,46 @@
 						id="lPwd1" placeholder="Contraseña"><br> <span
 						class="icon-key"></span><input class="inp" type="password"
 						id="lPwd2" placeholder="Repita su contraseña"><br>
-					<button onclick="subirFoto()">Seleccionar Avatar</button>
+					<button class="boton2" onclick="mostrarAvatars()">Seleccionar
+						avatar</button>
 					<br>
 					<button class="boton" onclick="register()">Registrarse</button>
 				</div>
 
-				<div id="overlay" onclick="off()">
-					<div class="container-fluid">
+				<div id="overlay" onclick="ocultarAvatars()">
+					<div id="avatars" class="container">
 						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-									<div class="col-md-4">
-										<img alt="Bootstrap Image Preview"
-											src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
-											class="rounded-circle" />
-									</div>
-								</div>
+							<div class="col-md-4">
+								<img alt="avatar mujer" src="Resources/girl1.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/girl1.png')" />
+							</div>
+							<div class="col-md-4">
+								<img alt="avatar hombre" src="Resources/girl.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/girl.png')" />
+							</div>
+							<div class="col-md-4">
+								<img alt="avatar chica" src="Resources/girl2.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/girl2.png')" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<img alt="avatar chico" src="Resources/man.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/man.png')" />
+							</div>
+							<div class="col-md-4">
+								<img alt="avatar niña" src="Resources/boy.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/boy.png')" />
+							</div>
+							<div class="col-md-4">
+								<img alt="avatar niño" src="Resources/boy1.png"
+									class="rounded-circle"
+									onclick="seleccionarAvatar('Resources/boy1.png')" />
 							</div>
 						</div>
 					</div>
@@ -146,24 +146,28 @@
 			});
 		}
 
-		function subirFoto() {
-			/*var file = foto.files[0];
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-				var blob = new Blob(reader.result);
-				var blobReader = new FileReader();
-				blobReader.onload = function(event) {
-					var buffer = event.target.result;
-					chat.send(buffer);
-				};
-				blobReader.readAsArrayBuffer(blob);
-			}
-			reader.readAsArrayBuffer(file);*/
+		function mostrarAvatars() {
 			document.getElementById("overlay").style.display = "block";
 		}
 
-		function off() {
+		function seleccionarAvatar(avatarPath) {
+			var blob = null;
+			var request = new XMLHttpRequest();
+			var myReader = new FileReader();
+
+			request.open('GET', avatarPath, true);
+			request.responseType = 'blob';//force the HTTP response, response-type header to be blob
+			request.onload = function() {
+				var reader = new FileReader();
+				reader.readAsDataURL(request.response);
+				reader.onload = function(e) {
+					console.log('DataURL', e.target.result);
+				};
+			};
+			request.send();
+		}
+
+		function ocultarAvatars() {
 			document.getElementById("overlay").style.display = "none";
 		}
 	</script>
