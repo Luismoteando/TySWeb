@@ -44,6 +44,7 @@ public class UserControllerPost {
 		} catch(Exception e) {
 			player = Player.registerGoogle(idGoogle, nombre, email);
 		}
+		session.setAttribute("player", player);
 		return player;
 	}
 	

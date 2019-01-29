@@ -108,4 +108,15 @@ public class Player {
 		MongoBroker.get().insert(player);
 		return player;
 	}
+
+	public byte[] loadFoto() {
+		try {
+			BsonDocument criterion = new BsonDocument();
+			criterion.append("userName", new BsonString(this.userName));
+			BsonDocument result = MongoBroker.get().loadBinary("Fotos", criterion);
+			return result.getBinary("bytes").getData();
+		} catch(Exception e) {
+			return null;
+		}
+	}
 }

@@ -98,9 +98,7 @@ public class MongoBroker {
 	public BsonDocument loadBinary(String collectionName, BsonDocument criterion) throws Exception {
 		MongoCollection<BsonDocument> collection=this.db.getCollection(collectionName, BsonDocument.class);
 		BsonDocument bsoBytes=new BsonDocument();
-		bsoBytes.append("fileName", new BsonInt32(1));
 		bsoBytes.append("bytes", new BsonInt32(1));
-		bsoBytes.append("_id", new BsonInt32(0));
 		FindIterable<BsonDocument> iterator = collection.find(criterion).projection(bsoBytes);
 		if (iterator==null)
 			return null;
@@ -175,18 +173,11 @@ public class MongoBroker {
 		return loadAll(mainObject, relatedObjectsClassName, fkField);
 	}
 	
-	public void insertBinary(ObjectId idOwner, String collectionName, String fileName, byte[] bytes, BsonValue... values) throws Exception {
+	public void insertBinary(String collectionName, String userName, byte[] bytes) throws Exception {
 		MongoCollection<BsonDocument> collection=this.db.getCollection(collectionName, BsonDocument.class);
 		BsonDocument bso=new BsonDocument();
 		bso.append("bytes", new BsonBinary(bytes));
-		bso.append("owner", new BsonObjectId(idOwner));
-		bso.append("fileName", new BsonString(fileName));
-		if (values.length%2!=0)
-			throw new Exception("Error in insertBinary: bad number of parameters");
-		for (int i=0; i<values.length; i++) {
-			bso.append(values[i].asString().getValue(), values[i+1]);
-			i++;
-		}
+		bso.append("userName", new BsonString(userName));
 		collection.insertOne(bso);
 	}
 

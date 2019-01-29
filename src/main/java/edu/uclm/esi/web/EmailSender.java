@@ -44,14 +44,14 @@ public class EmailSender {
 		Session session = Session.getInstance(properties, auth);
 
 		MimeMessage msg = new MimeMessage(session);
-		msg.setSubject("LaOca2018 - recuperación de contraseña");
+		msg.setSubject("LaOca2018 - recuperaciï¿½n de contraseï¿½a");
 		msg.setText(
-				"Pulsa en el siguiente enlace para crear una nueva contraseña: http://localhost:8080/newPWD.html?code="
+				"Pulsa en el siguiente enlace para crear una nueva contraseï¿½a: http://localhost:8080/newPWD.html?code="
 						+ codigo);
 		msg.setFrom(new InternetAddress(this.remitente));
 		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 		Transport.send(msg);
-		
+
 	}
 
 }

@@ -117,6 +117,8 @@
 			var profile = googleUser.getBasicProfile();
 			registrarOLoguear(profile.getId(), profile.getEmail(), profile
 					.getName());
+			sessionStorage.userName = profile.getEmail();
+			sessionStorage.image = profile.getImageUrl();
 			window.location = "elegirJuego.html";
 		}
 

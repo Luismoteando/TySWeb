@@ -16,11 +16,11 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script >
 	$(document).ready(function(){
-		document.getElementById("nombreU").innerHTML = sessionStorage.getItem("name");
-		//document.getElementById("imgU").innerHTML = sessionStorage.getItem("img");
+		document.getElementById("nombreU").innerHTML = sessionStorage.getItem("userName");
+		document.getElementById("imgFoto").src = sessionStorage.getItem("image");
 		
 		var id = sessionStorage.getItem('id');
-		;
+
 		$('#imgU').attr('src','http://graph.facebook.com/'+id+'/picture?type=large');
 		//document.getElementById('imgU').src = "data:image/png;base64," + dataImage;
 	
@@ -33,7 +33,7 @@
 
 		<header>
 			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías y Sistemas Web</h1>
-			<img id="imgU" alt="User" width="40" height="40" style="margin-left: 97%;margin-top: -37px;">
+			<img id="imgFoto" alt="User" width="40" height="40" style="margin-left: 97%;margin-top: -37px; border-radius: 50%;">
 			<p id="nombreU" style="margin-left: 80%;margin-top: -30px;"> Nombre de Usuario </p>
 		</header>
 
@@ -71,6 +71,13 @@
 			};
 			window.location = "indexppt.html"
 			
+		}
+		
+		ws.onmessage = function(msg) {
+			var data = msg.data;
+			if (data.TYPE == "FOTO") {
+				imgFoto.src="data:image/jpeg;base64," + data.foto
+			}
 		}
 	</script>
 </body>

@@ -15,6 +15,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
@@ -34,19 +35,32 @@ public class WSServer extends TextWebSocketHandler {
 		if (sessionsByPlayer.get(userName)!=null) {
 			sessionsByPlayer.remove(userName);
 		}
+		byte[] foto = player.loadFoto();
+		if (foto != null) {
+			sendBinary(session, foto);
+		}
 		sessionsByPlayer.put(userName, session);
 	}
 	
+	private void sendBinary(WebSocketSession session, byte[] foto) {
+		String imagen = Base64.encode(foto);		
+		JSONObject jso = new JSONObject();
+		try {
+			jso.put("TYPE", "FOTO");
+			jso.put("foto", imagen);
+			WebSocketMessage<?> message = new TextMessage(jso.toString()); 
+			session.sendMessage(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
 		Player player = (Player) session.getAttributes().get("player");
 		byte[] bytes = message.getPayload().array();
-		player.setFoto(bytes);
-		BsonDocument criterion = new BsonDocument();
-		criterion.append("userName",  new BsonString(player.getUserName()));
-		MongoBroker.get().delete("player", criterion);
 		try {
-			MongoBroker.get().insert(player);
+			MongoBroker.get().insertBinary("Fotos", player.getUserName(), bytes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
