@@ -19,6 +19,7 @@ public class Player {
 	private Match currentMatch;
 	@Bsonable
 	private byte[] foto;
+
 	@Bsonable
 	private String idGoogle;
 	@Bsonable
@@ -27,9 +28,18 @@ public class Player {
 	public String getUserName() {
 		return userName;
 	}
+	
+	public byte[] getFoto() {
+		return foto;
+	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Player() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getEmail() {
@@ -62,8 +72,8 @@ public class Player {
 		Player player = (Player) MongoBroker.get().loadOne(Player.class, criterion);
 		criterion = new BsonDocument();
 		criterion.append("userName", new BsonString(userName));
-		byte[]  foto = MongoBroker.get().loadBinary("Avatar", criterion);
-		player.setFoto(foto);
+		BsonDocument foto = MongoBroker.get().loadBinary("Avatar", criterion);
+		player.setFoto(foto.getBinary("bytes").getData());
 		return player;
 	}
 

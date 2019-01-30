@@ -14,18 +14,6 @@
 <script
 	src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script >
-	$(document).ready(function(){
-		document.getElementById("nombreU").innerHTML = sessionStorage.getItem("userName");
-		document.getElementById("imgFoto").src = sessionStorage.getItem("image");
-		
-		var id = sessionStorage.getItem('id');
-
-		$('#imgU').attr('src','http://graph.facebook.com/'+id+'/picture?type=large');
-		//document.getElementById('imgU').src = "data:image/png;base64," + dataImage;
-	
-	})
-	</script>
 </head>
 <body cz-shortcut-listen="true">
 	<div class="contenedor" data-ng-app="GameApp"
@@ -79,6 +67,22 @@
 				imgFoto.src="data:image/jpeg;base64," + data.foto
 			}
 		}
+	</script>
+	
+	<script>
+	$(document).ready(function(){
+		document.getElementById("nombreU").innerHTML = sessionStorage.getItem("userName");
+		document.getElementById("imgFoto").src = sessionStorage.getItem("image");
+		var p = new Player();
+		p.identify(sessionStorage.userName, sessionStorage.pwd);
+		document.getElementById("imgFoto").src = p.getFoto();
+		
+		var id = sessionStorage.getItem('id');
+
+		$('#imgU').attr('src','http://graph.facebook.com/'+id+'/picture?type=large');
+		//document.getElementById('imgU').src = "data:image/png;base64," + dataImage;
+	
+	})
 	</script>
 </body>
 </html>
