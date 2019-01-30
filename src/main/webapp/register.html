@@ -137,6 +137,7 @@
 				pwd1 : lPwd2.value,
 				pwd2 : lPwd2.value,
 				email : lEmail.value,
+				image : sessionStorage.image,
 			};
 			$.post("/register", p, function(respuesta, estado) {
 				if (estado == "success") {
@@ -162,6 +163,7 @@
 				reader.readAsDataURL(request.response);
 				reader.onload = function(e) {
 					console.log('DataURL', e.target.result);
+					sessionStorage.image = e.target.result.data;
 				};
 			};
 			request.send();

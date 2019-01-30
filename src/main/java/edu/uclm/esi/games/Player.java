@@ -60,15 +60,20 @@ public class Player {
 		BsonDocument criterion = new BsonDocument();
 		criterion.append("userName", new BsonString(userName)).put("pwd", new BsonString(pwd));
 		Player player = (Player) MongoBroker.get().loadOne(Player.class, criterion);
+		criterion = new BsonDocument();
+		criterion.append("userName", new BsonString(userName));
+		byte[]  foto = MongoBroker.get().loadBinary("Avatar", criterion);
+		player.setFoto(foto);
 		return player;
 	}
 
-	public static Player register(String email, String userName, String pwd) throws Exception {
+	public static Player register(String email, String userName, String pwd, byte[] avatar) throws Exception {
 		Player player = new Player();
 		player.setEmail(email);
 		player.setUserName(userName);
 		player.setPwd(pwd);
 		MongoBroker.get().insert(player);
+		MongoBroker.get().insertBinary("Avatar", userName, avatar);
 		return player;
 	}
 

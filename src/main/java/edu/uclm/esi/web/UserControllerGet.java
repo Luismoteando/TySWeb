@@ -16,10 +16,10 @@ import edu.uclm.esi.games.Player;
 public class UserControllerGet {
 	
 	@RequestMapping("/register")
-	public JSONObject register(@RequestParam(value="email") String email, @RequestParam(value="userName") String userName, @RequestParam(value="pwd1") String pwd1, @RequestParam(value="pwd2") String pwd2) throws Exception {
+	public JSONObject register(@RequestParam(value="email") String email, @RequestParam(value="userName") String userName, @RequestParam(value="pwd1") String pwd1, @RequestParam(value="pwd2") String pwd2, @RequestParam(value="image") byte[] image) throws Exception {
 		if (!pwd1.equals(pwd2))
 			return new JSONObject().put("mensaje","Error: las contraseñas no coinciden");
-		Player player=Player.register(email, userName, pwd1);
+		Player player=Player.register(email, userName, pwd1, image);
 		return new JSONObject().put("mensaje","OK");
 	}
 	
