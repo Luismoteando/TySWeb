@@ -9,7 +9,7 @@
 }
 
 .contenedor {
-	background-image: url(bg.png);
+	background-image: url(bg1.png);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	display: flex;
@@ -73,7 +73,7 @@ header a:hover{
 .fondo{
   width: 90%;
   height: 500px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.45);
   margin:0;
   display: flex;
   flex-direction: column;
@@ -85,7 +85,7 @@ header a:hover{
 .fondo1{
   width: 90%;
   height: 500px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.45);
   margin:0;
   display: flex;
   flex-direction: column;
