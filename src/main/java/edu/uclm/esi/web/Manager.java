@@ -3,6 +3,8 @@ package edu.uclm.esi.web;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.json.JSONArray;
 
 import edu.uclm.esi.games.Game;
@@ -10,6 +12,7 @@ import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
 import edu.uclm.esi.games.ppt.PPT;
 import edu.uclm.esi.games.tictactoe.TictactoeGame;
+import edu.uclm.esi.mongolabels.dao.MongoBroker;
 
 public class Manager {
 	private Hashtable<String, Game> games;
@@ -54,6 +57,13 @@ public class Manager {
 	
 	public void recuperarPWD (String email) throws Exception {
 		UsuarioRegistrado.recuperarPWD(email);
+	}
+	
+	public BsonDocument getAvatar (String userName) throws Exception {
+		BsonDocument criterion = new BsonDocument();
+		criterion.append("userName", new BsonString(userName));
+		BsonDocument avatar = MongoBroker.get().loadOne("Avatar", criterion);
+		return avatar;
 	}
 
 }

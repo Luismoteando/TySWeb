@@ -18,7 +18,7 @@ public class Player {
 	@JsonIgnore
 	private Match currentMatch;
 	@Bsonable
-	private byte[] foto;
+	private String foto;
 
 	@Bsonable
 	private String idGoogle;
@@ -29,7 +29,7 @@ public class Player {
 		return userName;
 	}
 	
-	public byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
@@ -54,8 +54,8 @@ public class Player {
 		this.pwd = pwd;
 	}
 	
-	public void setFoto(byte[] bytes) {
-		this.foto = bytes;
+	public void setFoto(String path) {
+		this.foto = path;
 	}
 	
 	private void setTipo(String tipo) {
@@ -72,18 +72,21 @@ public class Player {
 		Player player = (Player) MongoBroker.get().loadOne(Player.class, criterion);
 		criterion = new BsonDocument();
 		criterion.append("userName", new BsonString(userName));
-		BsonDocument foto = MongoBroker.get().loadBinary("Avatar", criterion);
-		player.setFoto(foto.getBinary("bytes").getData());
+		/*BsonDocument foto = MongoBroker.get().loadBinary("Avatar", criterion);
+		player.setFoto(foto.getBinary("bytes").getData());*/
+		BsonDocument foto = MongoBroker.get().loadOne("Avatar", criterion);
+		player.setFoto(foto.getString("path").getValue());
+		
 		return player;
 	}
 
-	public static Player register(String email, String userName, String pwd, byte[] avatar) throws Exception {
+	public static Player register(String email, String userName, String pwd, String avatar) throws Exception {
 		Player player = new Player();
 		player.setEmail(email);
 		player.setUserName(userName);
 		player.setPwd(pwd);
 		MongoBroker.get().insert(player);
-		MongoBroker.get().insertBinary("Avatar", userName, avatar);
+		MongoBroker.get().insertAvatar("Avatar", userName, avatar);
 		return player;
 	}
 

@@ -60,7 +60,7 @@ public class WSServer extends TextWebSocketHandler {
 		Player player = (Player) session.getAttributes().get("player");
 		byte[] bytes = message.getPayload().array();
 		try {
-			MongoBroker.get().insertBinary("Fotos", player.getUserName(), bytes);
+			//MongoBroker.get().insertAvatar("Fotos", player.getUserName(), bytes);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

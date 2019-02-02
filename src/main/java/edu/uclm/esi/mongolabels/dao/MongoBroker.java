@@ -173,10 +173,10 @@ public class MongoBroker {
 		return loadAll(mainObject, relatedObjectsClassName, fkField);
 	}
 	
-	public void insertBinary(String collectionName, String userName, byte[] bytes) throws Exception {
+	public void insertAvatar(String collectionName, String userName, String avatar) throws Exception {
 		MongoCollection<BsonDocument> collection=this.db.getCollection(collectionName, BsonDocument.class);
 		BsonDocument bso=new BsonDocument();
-		bso.append("bytes", new BsonBinary(bytes));
+		bso.append("path", new BsonString(avatar));
 		bso.append("userName", new BsonString(userName));
 		collection.insertOne(bso);
 	}

@@ -134,15 +134,14 @@
 		function register() {
 			var p = {
 				userName : lUserName.value,
-				pwd1 : lPwd2.value,
+				pwd1 : lPwd1.value,
 				pwd2 : lPwd2.value,
 				email : lEmail.value,
-				image : sessionStorage.image,
+				image : sessionStorage.getItem("imagen")
 			};
 			$.post("/register", p, function(respuesta, estado) {
 				if (estado == "success") {
 					window.location = "index.html"
-					sessionStorage.userName = respuesta.userName;
 				}
 			});
 		}
@@ -152,6 +151,7 @@
 		}
 
 		function seleccionarAvatar(avatarPath) {
+			sessionStorage.setItem("imagen", avatarPath);
 			var blob = null;
 			var request = new XMLHttpRequest();
 			var myReader = new FileReader();

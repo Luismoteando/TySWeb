@@ -14,51 +14,58 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <body>
 	<div class="contenedor" data-ng-app="pptApp"
 		data-ng-controller="pptController">
 
 		<header>
 			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías y Sistemas Web</h1>
+			<img id="imgFoto" alt="User" width="40" height="40"
+				style="margin-left: 97%; margin-top: -55px; border-radius: 50%;">
+			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
+				Nombre de Usuario</p>
 		</header>
 		<div class="row" style="margin-right: 0px;">
 			<div class="col-md-4">
-				<div class="ppt">
-					<article class="fondo">
+				<div class="ppt1">
+					<article class="fondo1">
 						<img src="Resources/user.png" alt="User">
-						<div class="options">
-							<p style="font-size: 20px; margin-bottom: 20px;">Elige la
-								opción que quieres jugar</p>
-							<div class="col-md-4">
-								<input id="image" type="image" src="Resources/piedra.png" alt="Submit"
-									width="80" height="80">
+						<div>
+							<div class="options">
+								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
+									opción que quieres jugar</p>
+								<div class="col-md-4">
+									<a href="javascript:move(0)"><input id="image" type="image" src="Resources/piedra.png" alt="Submit"
+										width="80" height="80"></a>
+								</div>
+								<div class="col-md-4">
+									<a href="javascript:move(1)"><input id="image" type="image" src="Resources/papel.png" alt="Submit"
+										width="80" height="80"></a>
+								</div>
+								<div class="col-md-4">
+									<a href="javascript:move(2)"><input id="image" type="image" src="Resources/tijera.png" alt="Submit"
+										width="80" height="80"></a>
+								</div>
 							</div>
-							<div class="col-md-4">
-								<input id="image" type="image" src="Resources/papel.png" alt="Submit"
-									width="80" height="80">
-							</div>
-							<div class="col-md-4">
-								<input id="image" type="image" src="Resources/tijera.png" alt="Submit"
-									width="80" height="80">
+							<div class="resultado">
+								<p
+									style="font-size: 20px; margin-bottom: 20px; margin-left: 100px; padding-top: 100px;">
+									Resultado:</p>
+								<div class="col-md-6">
+									<img type="image" src="Resources/papel.png" alt="Submit"
+										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; margin-left: 50px;">
+								</div>
+								<div class="col-md-6">
+									<img type="image" src="Resources/tijera.png" alt="Submit"
+										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px;">
+								</div>
+								<p
+									style="font-size: 20px; margin-bottom: 20px; margin-left: 105px; padding-top: 100px;">
+									¡Has perdido!</p>
 							</div>
 						</div>
-						<div class="resultado">
-							<p
-								style="margin-top: 20px; font-size: 20px; margin-bottom: 20px; margin-left: 50px;">
-								Resultado:</p>
-							<div class="col-md-6">
-								<img type="image" src="Resources/papel.png" alt="Submit"
-									style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px;">
-							</div>
-							<div class="col-md-6">
-								<img type="image" src="Resources/tijera.png" alt="Submit"
-									style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px;">
-							</div>
-							<p
-								style="font-size: 20px; margin-bottom: 20px; margin-left: 40px; padding-top: 100px;">
-								¡Has perdido!</p>
-						</div>
-
 					</article>
 				</div>
 			</div>
@@ -72,16 +79,16 @@
 								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
 									opción que quieres jugar</p>
 								<div class="col-md-4">
-									<input id="image" type="image" src="Resources/piedra.png" alt="Submit"
-										width="80" height="80">
+									<a href="javascript:move(0)"><input id="image" type="image" src="Resources/piedra.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<input id="image" type="image" src="Resources/papel.png" alt="Submit"
-										width="80" height="80">
+									<a href="javascript:move(1)"><input id="image" type="image" src="Resources/papel.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<input id="image" type="image" src="Resources/tijera.png" alt="Submit"
-										width="80" height="80">
+									<a href="javascript:move(2)"><input id="image" type="image" src="Resources/tijera.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="resultado">
@@ -165,6 +172,15 @@
 
 		<script>
 			var ws;
+			
+			$(document).ready(function() {
+				var userName = sessionStorage.userName;
+				var pwd = sessionStorage.pwd;
+
+				login(userName,pwd);
+				joinGame('Piedra, papel, tijera');
+			});
+			
 			function login(userName, pwd) {
 				var request = new XMLHttpRequest();
 				request.open("GET", "http://localhost:8080/login?userName="
@@ -194,9 +210,10 @@
 			}
 
 			function add(texto) {
-				var div = document.createElement("div");
-				textosRecibidos.appendChild(div);
-				div.innerHTML = texto;
+				/*var div = document.createElement("div");
+				resultado.appendChild(div);
+				div.innerHTML = texto;*/
+				console.log(texto);
 			}
 
 			function joinGame(gameName) {
@@ -219,5 +236,37 @@
 				ws.send(JSON.stringify(p));
 			}
 		</script>
+		<script>
+		if (sessionStorage.getItem('userName') != null) {
+			document.getElementById("nombreU").innerHTML = sessionStorage
+					.getItem('userName');
+			cargarAvatar();
+		}
+		function cargarAvatar() {
+			var request = new XMLHttpRequest();
+			request.open("POST", "avatar.jsp");
+			request.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					try {
+						document.getElementById("nombreU").innerHTML = sessionStorage
+								.getItem("userName");
+						var respuesta = JSON.parse(request.responseText);
+						if (respuesta.result == "OK") {
+							var imagen = document.getElementById("imgFoto");
+							imagen.src = respuesta.avatar;
+
+						}
+					} catch (e) {
+					}
+				}
+			}
+			var p = {
+				userName : sessionStorage.getItem("userName"),
+			}
+			request.send("p=" + JSON.stringify(p));
+		}
+	</script>
 </body>
 </html>

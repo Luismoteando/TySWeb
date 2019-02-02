@@ -22,7 +22,7 @@ import edu.uclm.esi.web.ws.WSServer;
 public class UserControllerPost {
 	
 	@RequestMapping(value = "/register", method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public Player register(String email, String userName, String pwd1, String pwd2, byte[] image) throws Exception {
+	public Player register(String email, String userName, String pwd1, String pwd2, String image) throws Exception {
 		if (!pwd1.equals(pwd2))
 			throw new Exception("Error: las contraseñas no coinciden");
 		Player player=Player.register(email, userName, pwd1, image);
