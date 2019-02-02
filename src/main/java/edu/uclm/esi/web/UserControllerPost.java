@@ -26,6 +26,8 @@ public class UserControllerPost {
 		if (!pwd1.equals(pwd2))
 			throw new Exception("Error: las contraseñas no coinciden");
 		Player player=Player.register(email, userName, pwd1, image);
+		if(player == null) 
+			throw new Exception("Usuario ya registrado");
 		return player;
 	}
 	

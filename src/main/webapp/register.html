@@ -142,6 +142,8 @@
 			$.post("/register", p, function(respuesta, estado) {
 				if (estado == "success") {
 					window.location = "index.html"
+				} else {
+					alert("Usuario ya registrado");
 				}
 			});
 		}

@@ -85,8 +85,12 @@ public class Player {
 		player.setEmail(email);
 		player.setUserName(userName);
 		player.setPwd(pwd);
-		MongoBroker.get().insert(player);
-		MongoBroker.get().insertAvatar("Avatar", userName, avatar);
+		try {
+			MongoBroker.get().insert(player);
+			MongoBroker.get().insertAvatar("Avatar", userName, avatar);
+		} catch (Exception e) {
+			return null;
+		}
 		return player;
 	}
 
