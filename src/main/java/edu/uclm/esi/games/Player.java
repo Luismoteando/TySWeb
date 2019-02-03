@@ -72,11 +72,9 @@ public class Player {
 		Player player = (Player) MongoBroker.get().loadOne(Player.class, criterion);
 		criterion = new BsonDocument();
 		criterion.append("userName", new BsonString(userName));
-		/*BsonDocument foto = MongoBroker.get().loadBinary("Avatar", criterion);
-		player.setFoto(foto.getBinary("bytes").getData());*/
 		BsonDocument foto = MongoBroker.get().loadOne("Avatar", criterion);
 		player.setFoto(foto.getString("path").getValue());
-		
+
 		return player;
 	}
 

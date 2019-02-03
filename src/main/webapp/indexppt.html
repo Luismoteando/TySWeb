@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Piedra, papel, tijera</title>
 <link rel="stylesheet" href="Resources/stylePPT.css">
 <link rel="stylesheet" href="Resources/font.css">
 <link rel="stylesheet"
@@ -36,7 +36,7 @@
 			<div class="col-md-6">
 				<div class="ppt1">
 					<article class="fondo1">
-						<img src="Resources/user.png" alt="User">
+						<img id="usr" src="Resources/user.png" alt="User">
 						<div>
 							<div class="options">
 								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
@@ -220,7 +220,7 @@
 						if (respuesta.result == "OK") {
 							var imagen = document.getElementById("imgFoto");
 							imagen.src = respuesta.avatar;
-
+							document.getElementById("usr").src = respuesta.avatar;
 						}
 					} catch (e) {
 					}

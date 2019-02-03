@@ -28,8 +28,14 @@
 			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
 				Nombre de Usuario</p>
 		</header>
+
+		<div id="overlay" onclick="joinGame('Destape de palabras')">
+			<button class="boton " onclick="joinGame('Destape de palabras')">Unirse
+				al juego</button>
+		</div>
+
 		<div class="row" style="margin-right: 0px;">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="ppt1">
 					<article class="fondo1">
 						<img id="usr" src="Resources/user.png" alt="User">
@@ -38,109 +44,65 @@
 								<p style="font-size: 20px; margin-bottom: 20px; color: #ffff;">Memoriza
 									estas palabras</p>
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image9" type="image"
-										src="Resources/mesa.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(0)"><input id="image0"
+										type="image" src="Resources/mesa.png" alt="Submit" width="80"
+										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image10" type="image"
-										src="Resources/piedra1.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(1)"><input id="image1"
+										type="image" src="Resources/piedra1.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image11" type="image"
-										src="Resources/tijera1.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(2)"><input id="image2"
+										type="image" src="Resources/tijera1.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="options">
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image12" type="image"
-										src="Resources/zapato.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(0)"><input id="image3"
+										type="image" src="Resources/zapato.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image13" type="image"
-										src="Resources/metal.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(1)"><input id="image4"
+										type="image" src="Resources/metal.png" alt="Submit" width="80"
+										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image14" type="image"
-										src="Resources/mano.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(2)"><input id="image5"
+										type="image" src="Resources/mano.png" alt="Submit" width="80"
+										height="80"></a>
 								</div>
 							</div>
 							<div class="options">
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image15" type="image"
-										src="Resources/correo.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(0)"><input id="image6"
+										type="image" src="Resources/correo.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image16" type="image"
-										src="Resources/foto.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(1)"><input id="image7"
+										type="image" src="Resources/foto.png" alt="Submit" width="80"
+										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image17" type="image"
-										src="Resources/papel1.png" alt="Submit" width="80" height="80"></a>
+									<a href="javascript:move(2)"><input id="image8"
+										type="image" src="Resources/papel1.png" alt="Submit"
+										width="80" height="80"></a>
 								</div>
-								
-								<p style="color: #ffff; font-size: 18px;"> Localiza la posición de: </p> 
-								<p id="word" style="color: #ffff; font-size: 18px;"> MESA </p>
+
+								<p style="color: #ffff; font-size: 18px;">Localiza la
+									posición de:</p>
+								<p id="word" style="color: #ffff; font-size: 18px;">MESA</p>
 							</div>
 						</div>
 					</article>
 				</div>
 			</div>
 
-			<div class="col-md-4">
-				<div class="ppt1">
-					<article class="fondo1">
-						<img src="Resources/user.png" alt="User">
-						<div>
-							<div class="options">
-								<p style="font-size: 20px; margin-bottom: 20px; color: #ffff;">Memoriza
-									estas palabras</p>
-								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image0" type="image"
-										src="Resources/mesa.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image1" type="image"
-										src="Resources/piedra1.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image2" type="image"
-										src="Resources/tijera1.png" alt="Submit" width="80" height="80"></a>
-								</div>
-							</div>
-							<div class="options">
-								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image3" type="image"
-										src="Resources/zapato.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image4" type="image"
-										src="Resources/metal.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image5" type="image"
-										src="Resources/mano.png" alt="Submit" width="80" height="80"></a>
-								</div>
-							</div>
-							<div class="options">
-								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image6" type="image"
-										src="Resources/correo.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image7" type="image"
-										src="Resources/foto.png" alt="Submit" width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image8" type="image"
-										src="Resources/papel1.png" alt="Submit" width="80" height="80"></a>
-								</div> 
-							</div>
-						</div>
-					</article>
-				</div>
-			</div>
-
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="row" style="height: 150px;">
 					<div class="col-md-6">
 						<p style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
@@ -207,15 +169,48 @@
 
 			$(document).ready(function() {
 				setTimeout(ocultar, 3000);
+				var userName = sessionStorage.userName;
+				var pwd = sessionStorage.pwd;
+
+				login(userName, pwd);
+				mostrarJoin();
 			});
 
 			function ocultar() {
 				var i;
-				for (i=0; i<18; i++){
+				for (i = 0; i < 9; i++) {
 					var img = "image" + i;
 					document.getElementById(img).src = "Resources/tapado.png"
 				}
 				document.getElementById("word").innerHTML = "TIJERA";
+			}
+
+			function login(userName, pwd) {
+				var request = new XMLHttpRequest();
+				request.open("GET", "http://localhost:8080/login?userName="
+						+ userName + "&pwd=" + pwd);
+				request.onreadystatechange = function() {
+					if (request.readyState == 4) {
+						add(request.responseText);
+						ws = new WebSocket("ws://localhost:8080/gamews");
+						ws.onopen = function() {
+							add("Conectado");
+						}
+						ws.onerror = function() {
+							add("Error al conectar el WS");
+						}
+						ws.onmessage = function(message) {
+							var data = message.data;
+							data = JSON.parse(data);
+							if (data.TYPE == "MATCH") {
+								add(JSON.stringify(data));
+							} else {
+								add("Mensaje desconocido");
+							}
+						}
+					}
+				};
+				request.send();
 			}
 
 			function add(texto) {
@@ -235,6 +230,7 @@
 					}
 				};
 				request.send();
+				ocultarJoin();
 			}
 
 			function move(coordinate) {
@@ -276,6 +272,13 @@
 					userName : sessionStorage.getItem("userName"),
 				}
 				request.send("p=" + JSON.stringify(p));
+			}
+			function mostrarJoin() {
+				document.getElementById("overlay").style.display = "block";
+			}
+
+			function ocultarJoin() {
+				document.getElementById("overlay").style.display = "none";
 			}
 		</script>
 </body>
