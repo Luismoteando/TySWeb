@@ -105,7 +105,7 @@
 			<div class="col-md-6">
 				<div class="row" style="height: 150px;">
 					<div class="col-md-6">
-						<p style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
+						<p id="p1" style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
 							Pepe:</p>
 						<svg width="200" height="120">
 							<g>
@@ -117,7 +117,7 @@
 						</svg>
 					</div>
 					<div class="col-md-6">
-						<p style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
+						<p id="p2" style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
 							Ana:</p>
 						<svg width="200" height="120">
 		  					<g>
@@ -202,6 +202,10 @@
 						ws.onmessage = function(message) {
 							var data = message.data;
 							data = JSON.parse(data);
+							var player1 = data.players[0].userName;
+							var player2 = data.players[1].userName;
+							document.getElementById("p1").innerHTML = player1;
+							document.getElementById("p2").innerHTML = player2;
 							if (data.TYPE == "MATCH") {
 								add(JSON.stringify(data));
 							} else {
