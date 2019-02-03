@@ -27,8 +27,13 @@
 			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
 				Nombre de Usuario</p>
 		</header>
+		
+		<div id="overlay" onclick="joinGame('Piedra, papel, tijera')">
+			<button class="boton "onclick="joinGame('Piedra, papel, tijera')">Unirse al juego</button>
+		</div>
+		
 		<div class="row" style="margin-right: 0px;">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="ppt1">
 					<article class="fondo1">
 						<img src="Resources/user.png" alt="User">
@@ -70,49 +75,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
-				<div class="ppt1">
-					<article class="fondo1">
-						<img src="Resources/user.png" alt="User">
-						<div>
-							<div class="options">
-								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
-									opción que quieres jugar</p>
-								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image" type="image" src="Resources/piedra.png" alt="Submit"
-										width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image" type="image" src="Resources/papel.png" alt="Submit"
-										width="80" height="80"></a>
-								</div>
-								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image" type="image" src="Resources/tijera.png" alt="Submit"
-										width="80" height="80"></a>
-								</div>
-							</div>
-							<div class="resultado">
-								<p
-									style="font-size: 20px; margin-bottom: 20px; margin-left: 100px; padding-top: 100px;">
-									Resultado:</p>
-								<div class="col-md-6">
-									<img type="image" src="Resources/tijera.png" alt="Submit"
-										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; margin-left: 50px;">
-								</div>
-								<div class="col-md-6">
-									<img type="image" src="Resources/papel.png" alt="Submit"
-										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px;">
-								</div>
-								<p
-									style="font-size: 20px; margin-bottom: 20px; margin-left: 105px; padding-top: 100px;">
-									¡Has ganado!</p>
-							</div>
-						</div>
-					</article>
-				</div>
-			</div>
-
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="row" style="height: 150px;">
 					<div class="col-md-6">
 						<p style="margin-bottom: 0px;margin-top: 20px;font-size: 18px;"> Pepe: </p>
@@ -178,7 +141,7 @@
 				var pwd = sessionStorage.pwd;
 
 				login(userName,pwd);
-				joinGame('Piedra, papel, tijera');
+				mostrarJoin();
 			});
 			
 			function login(userName, pwd) {
@@ -226,6 +189,7 @@
 					}
 				};
 				request.send();
+				ocultarJoin();
 			}
 
 			function move(coordinate) {
@@ -266,6 +230,14 @@
 				userName : sessionStorage.getItem("userName"),
 			}
 			request.send("p=" + JSON.stringify(p));
+		}
+		
+		function mostrarJoin() {
+			document.getElementById("overlay").style.display = "block";
+		}
+
+		function ocultarJoin() {
+			document.getElementById("overlay").style.display = "none";
 		}
 	</script>
 </body>

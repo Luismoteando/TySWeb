@@ -4,6 +4,10 @@
 	font-family: Comfortaa, cursive;
 }
 
+body {
+    height: 100vh;
+}
+
 .row {
 	margin-left: -15px;
 }
@@ -11,7 +15,7 @@
 .contenedor {
 	background-image: url(bg1.png);
 	background-size: 100%;
-	background-repeat: no-repeat;
+/* 	background-repeat: no-repeat; */
 	display: flex;
 	flex-direction: column;
 	width: 100%;
