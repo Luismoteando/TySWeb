@@ -14,24 +14,26 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<script 
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <body>
 	<div class="contenedor" data-ng-app="pptApp"
 		data-ng-controller="pptController">
 
 		<header>
-			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías y Sistemas Web</h1>
+			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías
+				y Sistemas Web</h1>
 			<img id="imgFoto" alt="User" width="40" height="40"
 				style="margin-left: 97%; margin-top: -55px; border-radius: 50%;">
 			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
-				Nombre de Usuario</p>
+				Usuario</p>
 		</header>
-		
+
 		<div id="overlay">
-			<button class="boton "onclick="joinGame('Piedra, papel, tijera')">Unirse al juego</button>
+			<button class="boton " onclick="joinGame('Piedra, papel, tijera')">Unirse
+				al juego</button>
 		</div>
-		
+
 		<div class="row" style="margin-right: 0px;">
 			<div class="col-md-6">
 				<div class="ppt1">
@@ -42,16 +44,16 @@
 								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
 									opción que quieres jugar</p>
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image" type="image" src="Resources/piedra.png" alt="Submit"
-										width="80" height="80"></a>
+									<a href="javascript:move(0)"><input id="image" type="image"
+										src="Resources/piedra.png" alt="Submit" width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image" type="image" src="Resources/papel.png" alt="Submit"
-										width="80" height="80"></a>
+									<a href="javascript:move(1)"><input id="image" type="image"
+										src="Resources/papel.png" alt="Submit" width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image" type="image" src="Resources/tijera.png" alt="Submit"
-										width="80" height="80"></a>
+									<a href="javascript:move(2)"><input id="image" type="image"
+										src="Resources/tijera.png" alt="Submit" width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="resultado">
@@ -59,16 +61,18 @@
 									style="font-size: 20px; margin-bottom: 20px; margin-left: 100px; padding-top: 100px;">
 									Resultado:</p>
 								<div class="col-md-6">
-									<img type="image" src="Resources/papel.png" alt="Submit"
-										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; margin-left: 50px;">
+									<img id="tirada1" type="image" src="Resources/piedra.png"
+										alt="Submit"
+										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; margin-left: 50px; display: none;">
 								</div>
 								<div class="col-md-6">
-									<img type="image" src="Resources/tijera.png" alt="Submit"
-										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px;">
+									<img id="tirada2" type="image" src="Resources/piedra.png"
+										alt="Submit"
+										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; display: none;">
 								</div>
-								<p
+								<p id="winner"
 									style="font-size: 20px; margin-bottom: 20px; margin-left: 105px; padding-top: 100px;">
-									¡Has perdido!</p>
+								</p>
 							</div>
 						</div>
 					</article>
@@ -78,22 +82,28 @@
 			<div class="col-md-6">
 				<div class="row" style="height: 150px;">
 					<div class="col-md-6">
-						<p id="p1" style="margin-bottom: 0px;margin-top: 20px;font-size: 18px;"> Pepe: </p>
+						<p id="p1"
+							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
+							Jugador 1:</p>
 						<svg width="200" height="120">
 							<g>
 			  					<rect x="50" y="20" rx="20" ry="20" width="70" height="60"
-									style="fill:#f2ee3a;stroke:black;stroke-width:5;opacity:0.5" />
-								<text x="75" y="62" font-family="Verdana" font-size="35" fill="black">0</text>
+								style="fill:#f2ee3a;stroke:black;stroke-width:5;opacity:0.5" />
+								<text id="marcador1" x="75" y="62" font-family="Verdana" font-size="35"
+								fill="black">0</text>
 							</g>
 						</svg>
 					</div>
 					<div class="col-md-6">
-						<p id ="p2" style="margin-bottom: 0px;margin-top: 20px;font-size: 18px;"> Ana: </p>
+						<p id="p2"
+							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
+							Jugador 2:</p>
 						<svg width="200" height="120">
 		  					<g>
 			  					<rect x="50" y="20" rx="20" ry="20" width="70" height="60"
-									style="fill:#f2ee3a;stroke:black;stroke-width:5;opacity:0.5" />
-								<text x="75" y="62" font-family="Verdana" font-size="35" fill="black">1</text>
+								style="fill:#f2ee3a;stroke:black;stroke-width:5;opacity:0.5" />
+								<text id="marcador2" x="75" y="62" font-family="Verdana" font-size="35"
+								fill="black">0</text>
 							</g>
 						</svg>
 					</div>
@@ -135,15 +145,17 @@
 
 		<script>
 			var ws;
-			
+			var ronda1 = 0;
+			var ronda2 = 0;
+
 			$(document).ready(function() {
 				var userName = sessionStorage.userName;
 				var pwd = sessionStorage.pwd;
 
-				login(userName,pwd);
+				login(userName, pwd);
 				mostrarJoin();
 			});
-			
+
 			function login(userName, pwd) {
 				var request = new XMLHttpRequest();
 				request.open("GET", "http://localhost:8080/login?userName="
@@ -165,6 +177,102 @@
 							var player2 = data.players[1].userName;
 							document.getElementById("p1").innerHTML = player1;
 							document.getElementById("p2").innerHTML = player2;
+
+							var winner = data.board.winner;
+							if (sessionStorage.userName == player1) {
+								var tiradas1 = data.board.tiradas1;
+								var tiradas2 = data.board.tiradas2;
+								if (tiradas1[ronda1] != -1) {
+									if (tiradas1[ronda1] == 0) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/piedra.png";
+									} else if (tiradas1[ronda1] == 1) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/papel.png";
+									} else if (tiradas1[ronda1] == 2) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/tijera.png";
+									}
+									ronda1++;
+								}
+								if (tiradas2[ronda2] != -1) {
+									if (tiradas2[ronda2] == 0) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/piedra.png";
+									} else if (tiradas2[ronda2] == 1) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/papel.png";
+									} else if (tiradas2[ronda2] == 2) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/tijera.png";
+									}
+									ronda2++;
+								}
+								/* if(ronda1 == ronda2) {
+									document.getElementById("tirada1").style.display = "none";
+									document.getElementById("tirada2").style.display = "none";
+								} */
+								if (winner != null) {
+									if (sessionStorage.userName == winner.userName) {
+										document.getElementById("winner").innerHTML = "¡Has ganado!";
+										var value = document.getElementById("marcador1").innerHTML;
+										document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+									} else {
+										document.getElementById("winner").innerHTML = "¡Has perdido!";
+										var value = document.getElementById("marcador2").innerHTML;
+										document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+									}
+									mostrarJoin();
+								}
+							}
+
+							if (sessionStorage.userName == player2) {
+								var tiradas2 = data.board.tiradas2;
+								var tiradas1 = data.board.tiradas1;
+								if (tiradas2[ronda2] != -1) {
+									if (tiradas2[ronda2] == 0) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/piedra.png";
+									} else if (tiradas2[ronda2] == 1) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/papel.png";
+									} else if (tiradas2[ronda2] == 2) {
+										document.getElementById("tirada1").style.display = "block";
+										document.getElementById("tirada1").src = "Resources/tijera.png";
+									}
+									ronda2++;
+								}
+								if (tiradas1[ronda1] != -1) {
+									if (tiradas1[ronda1] == 0) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/piedra.png";
+									} else if (tiradas1[ronda1] == 1) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/papel.png";
+									} else if (tiradas1[ronda1] == 2) {
+										document.getElementById("tirada2").style.display = "block";
+										document.getElementById("tirada2").src = "Resources/tijera.png";
+									}
+									ronda1++;
+								}
+								/* if(ronda1 == ronda2) {
+								document.getElementById("tirada1").style.display = "none";
+								document.getElementById("tirada2").style.display = "none";
+								} */
+								if (winner != null) {
+									if (sessionStorage.userName == winner.userName) {
+										document.getElementById("winner").innerHTML = "¡Has ganado!";
+										var value = document.getElementById("marcador2").innerHTML;
+										document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+									} else {
+										document.getElementById("winner").innerHTML = "¡Has perdido!";
+										var value = document.getElementById("marcador1").innerHTML;
+										document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+									}
+									mostrarJoin();
+								}
+							}
+
 							if (data.TYPE == "MATCH") {
 								add(JSON.stringify(data));
 							} else {
@@ -205,45 +313,48 @@
 			}
 		</script>
 		<script>
-		if (sessionStorage.getItem('userName') != null) {
-			document.getElementById("nombreU").innerHTML = sessionStorage
-					.getItem('userName');
-			cargarAvatar();
-		}
-		function cargarAvatar() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "avatar.jsp");
-			request.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
-			request.onreadystatechange = function() {
-				if (request.readyState == 4) {
-					try {
-						document.getElementById("nombreU").innerHTML = sessionStorage
-								.getItem("userName");
-						var respuesta = JSON.parse(request.responseText);
-						if (respuesta.result == "OK") {
-							var imagen = document.getElementById("imgFoto");
-							imagen.src = respuesta.avatar;
-							document.getElementById("usr").src = respuesta.avatar;
-						
+			if (sessionStorage.getItem('userName') != null) {
+				document.getElementById("nombreU").innerHTML = sessionStorage
+						.getItem('userName');
+				cargarAvatar();
+			}
+			function cargarAvatar() {
+				var request = new XMLHttpRequest();
+				request.open("POST", "avatar.jsp");
+				request.setRequestHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+				request.onreadystatechange = function() {
+					if (request.readyState == 4) {
+						try {
+							document.getElementById("nombreU").innerHTML = sessionStorage
+									.getItem("userName");
+							var respuesta = JSON.parse(request.responseText);
+							if (respuesta.result == "OK") {
+								var imagen = document.getElementById("imgFoto");
+								imagen.src = respuesta.avatar;
+								document.getElementById("usr").src = respuesta.avatar;
+
+							}
+						} catch (e) {
 						}
-					} catch (e) {
 					}
 				}
+				var p = {
+					userName : sessionStorage.getItem("userName"),
+				}
+				request.send("p=" + JSON.stringify(p));
 			}
-			var p = {
-				userName : sessionStorage.getItem("userName"),
-			}
-			request.send("p=" + JSON.stringify(p));
-		}
-		
-		function mostrarJoin() {
-			document.getElementById("overlay").style.display = "block";
-		}
 
-		function ocultarJoin() {
-			document.getElementById("overlay").style.display = "none";
-		}
-	</script>
+			function mostrarJoin() {
+				document.getElementById("overlay").style.display = "block";
+			}
+
+			function ocultarJoin() {
+				document.getElementById("overlay").style.display = "none";
+				document.getElementById("winner").innerHTML = "";
+				document.getElementById("tirada1").style.display = "none";
+				document.getElementById("tirada2").style.display = "none";
+			}
+		</script>
 </body>
 </html>
