@@ -1,5 +1,7 @@
 package edu.uclm.esi.games.ppt;
 
+import java.util.Random;
+
 import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
 import edu.uclm.esi.games.Result;
@@ -19,7 +21,8 @@ public class PPTMatch extends Match {
 	@Override
 	public void calculateFirstPlayer() {
 		// TODO Auto-generated method stub
-
+		boolean dado = new Random().nextBoolean();
+		this.currentPlayer = dado ? 0 : 1;
 	}
 
 	protected void save() throws Exception {

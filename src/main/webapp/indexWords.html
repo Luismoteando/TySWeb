@@ -44,58 +44,58 @@
 								<p style="font-size: 20px; margin-bottom: 20px; color: #ffff;">Memoriza
 									estas palabras</p>
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image0"
+									<a href="javascript:check('Mesa')"><input id="image0"
 										type="image" src="Resources/mesa.png" alt="Submit" width="80"
 										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image1"
+									<a href="javascript:check('Piedra')"><input id="image1"
 										type="image" src="Resources/piedra1.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image2"
+									<a href="javascript:check('Tijera')"><input id="image2"
 										type="image" src="Resources/tijera1.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="options">
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image3"
+									<a href="javascript:check('Zapato')"><input id="image3"
 										type="image" src="Resources/zapato.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image4"
+									<a href="javascript:check('Metal')"><input id="image4"
 										type="image" src="Resources/metal.png" alt="Submit" width="80"
 										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image5"
+									<a href="javascript:check('Mano')"><input id="image5"
 										type="image" src="Resources/mano.png" alt="Submit" width="80"
 										height="80"></a>
 								</div>
 							</div>
 							<div class="options">
 								<div class="col-md-4">
-									<a href="javascript:move(0)"><input id="image6"
+									<a href="javascript:check('Correo')"><input id="image6"
 										type="image" src="Resources/correo.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(1)"><input id="image7"
+									<a href="javascript:check('Foto')"><input id="image7"
 										type="image" src="Resources/foto.png" alt="Submit" width="80"
 										height="80"></a>
 								</div>
 								<div class="col-md-4">
-									<a href="javascript:move(2)"><input id="image8"
+									<a href="javascript:check('Papel')"><input id="image8"
 										type="image" src="Resources/papel1.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
 
 								<p style="color: #ffff; font-size: 18px;">Localiza la
 									posición de:</p>
-								<p id="word" style="color: #ffff; font-size: 18px;">MESA</p>
+								<p id="word" style="color: #ffff; font-size: 18px;"></p>
 							</div>
 						</div>
 					</article>
@@ -166,9 +166,9 @@
 
 		<script>
 			var ws;
+			var palabra;
 
 			$(document).ready(function() {
-				setTimeout(ocultar, 3000);
 				var userName = sessionStorage.userName;
 				var pwd = sessionStorage.pwd;
 
@@ -182,7 +182,14 @@
 					var img = "image" + i;
 					document.getElementById(img).src = "Resources/tapado.png"
 				}
-				document.getElementById("word").innerHTML = "TIJERA";
+				generarPalabra();
+			}
+			
+			function generarPalabra() {
+				var palabras = ["Tijera", "Mano", "Piedra", "Mesa", "Zapato", "Correo", "Metal", "Foto", "Papel"];
+				var i = Math.floor((Math.random() * 8) + 0);
+				palabra = palabras[i];
+				document.getElementById("word").innerHTML = palabra;
 			}
 
 			function login(userName, pwd) {
@@ -202,6 +209,7 @@
 						ws.onmessage = function(message) {
 							var data = message.data;
 							data = JSON.parse(data);
+							console.log(data);
 							var player1 = data.players[0].userName;
 							var player2 = data.players[1].userName;
 							document.getElementById("p1").innerHTML = player1;
@@ -235,9 +243,16 @@
 				};
 				request.send();
 				ocultarJoin();
+				setTimeout(ocultar, 3000);
 			}
 
-			function move(coordinate) {
+			function check(selected) {
+				var coordinate;
+				if(palabra == selected) {
+					coordinate = 1;
+				} else {
+					coordinate = 0;
+				}
 				var p = {
 					TYPE : "MOVEMENT",
 					coordinates : [ coordinate ]
