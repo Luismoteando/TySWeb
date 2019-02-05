@@ -12,7 +12,6 @@ import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
 import edu.uclm.esi.games.ppt.PPT;
 import edu.uclm.esi.games.palabras.Palabras;
-import edu.uclm.esi.games.tictactoe.TictactoeGame;
 import edu.uclm.esi.mongolabels.dao.MongoBroker;
 
 public class Manager {
@@ -20,8 +19,6 @@ public class Manager {
 	
 	private Manager() {
 		games=new Hashtable<>();
-		Game tictactoe=new TictactoeGame();
-		games.put(tictactoe.getName(), tictactoe);
 		Game ppt = new PPT();
 		games.put(ppt.getName(), ppt);
 		Game palabra = new Palabras();

@@ -17,8 +17,8 @@ public class PPTBoard extends Board {
 	
 	public PPTBoard(PPTMatch pptMatch) {
 		super(pptMatch);
-		this.tiradas0 = new int[] {-1,-1,-1};
-		this.tiradas1 = new int[] {-1,-1,-1};
+		this.tiradas0 = new int[] {-1};
+		this.tiradas1 = new int[] {-1};
 	}
 
 	@Override

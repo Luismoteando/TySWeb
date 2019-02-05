@@ -60,10 +60,9 @@ public class PalabrasBoard extends Board{
 	private boolean gana(int tiradas0, int tiradas1) {
 		if(tiradas0 == 1) {
 			return true;
-		} else if(tiradas1 == 1){
+		} else {
 			return false;
 		}
-		return false;
 	}
 	
 	public int[] getTiradas1() {
