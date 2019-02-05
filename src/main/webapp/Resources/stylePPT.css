@@ -134,6 +134,12 @@ header a:hover{
   border-bottom-left-radius: 5px;
 }
 
+#mensajes {
+	height: 500px;
+    overflow-y: scroll;
+    min-width: 100px
+}
+
 .inp{
   box-shadow: 0;
   border: 0;

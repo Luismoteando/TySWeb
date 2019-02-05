@@ -137,6 +137,8 @@ header a:hover{
 
 #mensajes {
 	height: 500px;
+    overflow-y: scroll;
+    min-width: 100px
 }
 
 .inp{

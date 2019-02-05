@@ -111,36 +111,10 @@
 						</svg>
 					</div>
 				</div>
-				<div class="row" style="background: white;">
-					<div class="container" style="width: 80%;">
-						<img src="Resources/user.png" alt="Avatar" style="width: 100%;">
-						<p>Hello. How are you today?</p>
-						<span class="time-right">11:00</span>
-					</div>
-
-					<div class="container darker" style="width: 80%;">
-						<img src="Resources/user.png" alt="Avatar" class="right"
-							style="width: 100%;">
-						<p>Hey! I'm fine. Thanks for asking!</p>
-						<span class="time-left">11:01</span>
-					</div>
-
-					<div class="container" style="width: 80%;">
-						<img src="Resources/user.png" alt="Avatar" style="width: 100%;">
-						<p>Sweet! So, what do you wanna do today?</p>
-						<span class="time-right">11:02</span>
-					</div>
-
-					<div class="container darker" style="width: 80%;">
-						<img src="Resources/user.png" alt="Avatar" style="width: 100%;">
-						<p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-						<span class="time-left">11:05</span>
-					</div>
-
-					<form name="message"action"">
-						<input name="msg" type="text" id="msg" />
-						<button type="submit" class="btn" id="btn_send">Send</button>
-					</form>
+				<div id="chat" class="row" style="background: white;">
+					<div id="mensajes"></div>
+					<input id="mensaje" name="msg" type="text" id="msg" />
+					<button onclick="enviarMensaje()" class="btn" id="btn_send">Send</button>
 				</div>
 			</div>
 		</div>
@@ -174,140 +148,164 @@
 						ws.onmessage = function(message) {
 							var data = message.data;
 							data = JSON.parse(data);
-							var player1 = data.players[0].userName;
-							var player2 = data.players[1].userName;
-							document.getElementById("p1").innerHTML = player1;
-							document.getElementById("p2").innerHTML = player2;
-
-							var winner = data.board.winner;
-							var tiradas1 = data.board.tiradas1;
-							var tiradas2 = data.board.tiradas2;
-							if (sessionStorage.userName == player1) {
-								if (tiradas1[0] != -1) {
-									if (tiradas1[0] == 0) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/piedra1.png";
-									} else if (tiradas1[0] == 1) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/papel1.png";
-									} else if (tiradas1[0] == 2) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/tijera1.png";
-									}
-									
-								}
-
-								if (winner != null) {
-									if (tiradas2[0] != -1) {
-										if (tiradas2[0] == 0) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/piedra1.png";
-										} else if (tiradas2[0] == 1) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/papel1.png";
-										} else if (tiradas2[0] == 2) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/tijera1.png";
-										}
-										
-									}
-
-									if (sessionStorage.userName == winner.userName) {
-										document.getElementById("winner").innerHTML = "¡Has ganado!";
-										var value = document
-												.getElementById("marcador1").innerHTML;
-										document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-										if (tiradas1[0] == tiradas2[0]) {
-											document.getElementById("winner").innerHTML = "¡Habéis empatado!";
-											var value = document
-													.getElementById("marcador1").innerHTML;
-											document
-													.getElementById("marcador1").innerHTML = parseInt(value) - 1;
-										}
-									} else {
-										document.getElementById("winner").innerHTML = "¡Has perdido!";
-										var value = document
-												.getElementById("marcador2").innerHTML;
-										document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-										if (tiradas1[0] == tiradas2[0]) {
-											document.getElementById("winner").innerHTML = "¡Habéis empatado!";
-											var value = document
-													.getElementById("marcador2").innerHTML;
-											document
-													.getElementById("marcador2").innerHTML = parseInt(value) - 1;
-										}
-									}
-									setTimeout(mostrarElegirJuego, 2000);
-								}
-							}
-
-							if (sessionStorage.userName == player2) {
-								var tiradas2 = data.board.tiradas2;
-								var tiradas1 = data.board.tiradas1;
-								if (tiradas2[0] != -1) {
-									if (tiradas2[0] == 0) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/piedra1.png";
-									} else if (tiradas2[0] == 1) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/papel1.png";
-									} else if (tiradas2[0] == 2) {
-										document.getElementById("tirada1").style.display = "block";
-										document.getElementById("tirada1").src = "Resources/tijera1.png";
-									}
-									
-								}
-
-								if (winner != null) {
-									if (tiradas1[0] != -1) {
-										if (tiradas1[0] == 0) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/piedra1.png";
-										} else if (tiradas1[0] == 1) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/papel1.png";
-										} else if (tiradas1[0] == 2) {
-											document.getElementById("tirada2").style.display = "block";
-											document.getElementById("tirada2").src = "Resources/tijera1.png";
-										}
-										
-									}
-									
-									if (sessionStorage.userName == winner.userName) {
-										document.getElementById("winner").innerHTML = "¡Has ganado!";
-										var value = document
-												.getElementById("marcador2").innerHTML;
-										document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-										
-										if (tiradas1[0] == tiradas2[0]) {
-											document.getElementById("winner").innerHTML = "¡Habéis empatado!";
-											var value = document
-													.getElementById("marcador2").innerHTML;
-											document
-													.getElementById("marcador2").innerHTML = parseInt(value) - 1;
-										}
-									} else {
-										document.getElementById("winner").innerHTML = "¡Has perdido!";
-										var value = document
-												.getElementById("marcador1").innerHTML;
-										document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-										
-										if (tiradas1[0] == tiradas2[0]) {
-											document.getElementById("winner").innerHTML = "¡Habéis empatado!";
-											var value = document
-													.getElementById("marcador1").innerHTML;
-											document
-													.getElementById("marcador1").innerHTML = parseInt(value) - 1;
-										}
-									}
-									setTimeout(mostrarElegirJuego, 2000);
-								}
-							}
 
 							if (data.TYPE == "MATCH") {
 								add(JSON.stringify(data));
+								var player1 = data.players[0].userName;
+								var player2 = data.players[1].userName;
+								document.getElementById("p1").innerHTML = player1;
+								document.getElementById("p2").innerHTML = player2;
+
+								var winner = data.board.winner;
+								var tiradas1 = data.board.tiradas1;
+								var tiradas2 = data.board.tiradas2;
+								if (sessionStorage.userName == player1) {
+									if (tiradas1[0] != -1) {
+										if (tiradas1[0] == 0) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/piedra1.png";
+										} else if (tiradas1[0] == 1) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/papel1.png";
+										} else if (tiradas1[0] == 2) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/tijera1.png";
+										}
+
+									}
+
+									if (winner != null) {
+										if (tiradas2[0] != -1) {
+											if (tiradas2[0] == 0) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/piedra1.png";
+											} else if (tiradas2[0] == 1) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/papel1.png";
+											} else if (tiradas2[0] == 2) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/tijera1.png";
+											}
+
+										}
+
+										if (sessionStorage.userName == winner.userName) {
+											document.getElementById("winner").innerHTML = "¡Has ganado!";
+											var value = document
+													.getElementById("marcador1").innerHTML;
+											document
+													.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+											if (tiradas1[0] == tiradas2[0]) {
+												document
+														.getElementById("winner").innerHTML = "¡Habéis empatado!";
+												var value = document
+														.getElementById("marcador1").innerHTML;
+												document
+														.getElementById("marcador1").innerHTML = parseInt(value) - 1;
+											}
+										} else {
+											document.getElementById("winner").innerHTML = "¡Has perdido!";
+											var value = document
+													.getElementById("marcador2").innerHTML;
+											document
+													.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+											if (tiradas1[0] == tiradas2[0]) {
+												document
+														.getElementById("winner").innerHTML = "¡Habéis empatado!";
+												var value = document
+														.getElementById("marcador2").innerHTML;
+												document
+														.getElementById("marcador2").innerHTML = parseInt(value) - 1;
+											}
+										}
+										setTimeout(mostrarElegirJuego, 2000);
+									}
+								}
+
+								if (sessionStorage.userName == player2) {
+									var tiradas2 = data.board.tiradas2;
+									var tiradas1 = data.board.tiradas1;
+									if (tiradas2[0] != -1) {
+										if (tiradas2[0] == 0) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/piedra1.png";
+										} else if (tiradas2[0] == 1) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/papel1.png";
+										} else if (tiradas2[0] == 2) {
+											document.getElementById("tirada1").style.display = "block";
+											document.getElementById("tirada1").src = "Resources/tijera1.png";
+										}
+
+									}
+
+									if (winner != null) {
+										if (tiradas1[0] != -1) {
+											if (tiradas1[0] == 0) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/piedra1.png";
+											} else if (tiradas1[0] == 1) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/papel1.png";
+											} else if (tiradas1[0] == 2) {
+												document
+														.getElementById("tirada2").style.display = "block";
+												document
+														.getElementById("tirada2").src = "Resources/tijera1.png";
+											}
+
+										}
+
+										if (sessionStorage.userName == winner.userName) {
+											document.getElementById("winner").innerHTML = "¡Has ganado!";
+											var value = document
+													.getElementById("marcador2").innerHTML;
+											document
+													.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+
+											if (tiradas1[0] == tiradas2[0]) {
+												document
+														.getElementById("winner").innerHTML = "¡Habéis empatado!";
+												var value = document
+														.getElementById("marcador2").innerHTML;
+												document
+														.getElementById("marcador2").innerHTML = parseInt(value) - 1;
+											}
+										} else {
+											document.getElementById("winner").innerHTML = "¡Has perdido!";
+											var value = document
+													.getElementById("marcador1").innerHTML;
+											document
+													.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+
+											if (tiradas1[0] == tiradas2[0]) {
+												document
+														.getElementById("winner").innerHTML = "¡Habéis empatado!";
+												var value = document
+														.getElementById("marcador1").innerHTML;
+												document
+														.getElementById("marcador1").innerHTML = parseInt(value) - 1;
+											}
+										}
+										setTimeout(mostrarElegirJuego, 2000);
+									}
+								}
 							} else {
 								add("Mensaje desconocido");
+							}
+
+							if (data.TYPE == "MESSAGE") {
+								mostrarMensaje(data);
 							}
 						}
 					}
@@ -393,13 +391,32 @@
 				document.getElementById("join").style.display = "none";
 				document.getElementById("elegir").style.display = "inline-block";
 			}
-			
-			var height=0;
-			$('#mensajes div').each(function(i, value) {
-				height += parseInt($(this).height());
-			});
-			height += '';
-			$('#mensajes').animate({scrollTop: height});
+			function enviarMensaje() {
+				if (document.getElementById("mensaje").value != "") {
+					var p = {
+						TYPE : "MESSAGE",
+						userName : sessionStorage.userName,
+						message : document.getElementById("mensaje").value,
+						image : document.getElementById("imgFoto").src
+					};
+					ws.send(JSON.stringify(p));
+				}
+			}
+			function mostrarMensaje(data) {
+				if (sessionStorage.userName == data.userName) {
+					document.getElementById("mensajes").innerHTML += "<div class='container darker' style='width: 80%;'><img src='"
+							+ data.image
+							+ "' alt='Avatar' class='right' style='width: 100%;'><p>"
+							+ data.message
+							+ "</p><span class='time-left'>11:01</span></div>";
+				} else {
+					document.getElementById("mensajes").innerHTML += "<div class='container' style='width: 80%;'><img src='"
+							+ data.image
+							+ "' alt='Avatar' class='left' style='width: 100%;'><p>"
+							+ data.message
+							+ "</p><span class='time-right'>11:01</span></div>";
+				}
+			}
 		</script>
 </body>
 </html>
