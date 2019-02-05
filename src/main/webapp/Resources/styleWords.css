@@ -88,7 +88,8 @@ header a:hover{
 
 .fondo1{
   width: 90%;
-  height: 500px;
+/*   height: 500px; */
+  height: 600px;
   background-color: rgba(0, 0, 0, 0.45);
   margin:0;
   display: flex;

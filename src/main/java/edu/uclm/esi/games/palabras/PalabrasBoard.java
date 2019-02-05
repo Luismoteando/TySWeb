@@ -65,6 +65,14 @@ public class PalabrasBoard extends Board{
 		}
 		return false;
 	}
+	
+	public int[] getTiradas1() {
+		return tiradas0;
+	}
+	
+	public int[] getTiradas2() {
+		return tiradas1;
+	}
 
 	@Override
 	public boolean end() {
