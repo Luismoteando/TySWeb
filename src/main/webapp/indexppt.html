@@ -393,6 +393,13 @@
 				document.getElementById("join").style.display = "none";
 				document.getElementById("elegir").style.display = "inline-block";
 			}
+			
+			var height=0;
+			$('#mensajes div').each(function(i, value) {
+				height += parseInt($(this).height());
+			});
+			height += '';
+			$('#mensajes').animate({scrollTop: height});
 		</script>
 </body>
 </html>

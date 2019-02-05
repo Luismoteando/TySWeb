@@ -120,7 +120,7 @@ header a:hover{
   margin-bottom: 40px;
 }
 
-.fondo form{
+.fondo form {
   width: 70%;
 }
 
@@ -133,6 +133,10 @@ header a:hover{
   border-top: solid 9px rgba(255, 255, 255,.01);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+}
+
+#mensajes {
+	height: 500px;
 }
 
 .inp{
