@@ -4,10 +4,6 @@
 	font-family: Comfortaa, cursive;
 }
 
-body {
-    height: 100vh;
-}
-
 .contenedor {
 	background-image: url(back.jpg);
 	background-size: 100%;

@@ -364,6 +364,10 @@
 			if (sessionStorage.getItem('userName') != null) {
 				document.getElementById("nombreU").innerHTML = sessionStorage
 						.getItem('userName');
+				try {
+					document.getElementById("usr").src = sessionStorage.getItem("image");
+					document.getElementById("imgFoto").src = sessionStorage.getItem("image");
+				} catch (e) {}
 				cargarAvatar();
 			}
 			function cargarAvatar() {

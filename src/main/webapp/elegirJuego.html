@@ -76,6 +76,9 @@
 			document.getElementById("nombreU").innerHTML = sessionStorage
 					.getItem('userName');
 			cargarAvatar();
+			try {
+				document.getElementById("imgFoto").src = sessionStorage.getItem("image");
+			} catch (e) {}
 		}
 		function cargarAvatar() {
 			var request = new XMLHttpRequest();
