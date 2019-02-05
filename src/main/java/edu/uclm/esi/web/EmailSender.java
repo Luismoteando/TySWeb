@@ -22,7 +22,7 @@ public class EmailSender {
 		}
 	}
 
-	public void enviar(String email, long codigo) throws MessagingException {
+	public void enviar(String email, String string) throws MessagingException {
 		this.smtpHost = "smtp.gmail.com";
 		this.startTTLS = "true";
 		this.port = "465";
@@ -44,10 +44,10 @@ public class EmailSender {
 		Session session = Session.getInstance(properties, auth);
 
 		MimeMessage msg = new MimeMessage(session);
-		msg.setSubject("LaOca2018 - recuperaci�n de contrase�a");
+		msg.setSubject("LaOca2018 - recuperación de contraseña");
 		msg.setText(
-				"Pulsa en el siguiente enlace para crear una nueva contrase�a: http://localhost:8080/newPWD.html?code="
-						+ codigo);
+				"Pulsa en el siguiente enlace para crear una nueva contraseña: http://localhost:8080/newPWD.html?code="
+						+ string + "&email=" + email);
 		msg.setFrom(new InternetAddress(this.remitente));
 		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 		Transport.send(msg);

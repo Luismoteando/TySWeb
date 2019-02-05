@@ -55,9 +55,9 @@ public class Manager {
 		
 	}
 	
-	public void recuperarPWD (String email) throws Exception {
-		UsuarioRegistrado.recuperarPWD(email);
-	}
+//	public void recuperarPWD (String email) throws Exception {
+//		UsuarioRegistrado.recuperarPWD(email);
+//	}
 	
 	public BsonDocument getAvatar (String userName) throws Exception {
 		BsonDocument criterion = new BsonDocument();

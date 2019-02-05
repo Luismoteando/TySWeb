@@ -23,13 +23,12 @@
 				<h3>Restablezca su contraseña</h3>
 				<div>
 					<span class="icon-key"></span><input class="inp" type="text"
-						id="lEmail" placeholder="Nueva Contraseña" value=""
-						name="mailTo"><br>
-						<span class="icon-key"></span><input class="inp" type="text"
-						id="lEmail" placeholder="Repita Contraseña" value=""
-						name="mailTo"><br>
-						<input id="sendEmailBtn"
-						onclick="newPWD()" value="Reestablecer" />
+						id="pwdNueva1" placeholder="Nueva Contraseña" value=""
+						name="mailTo"><br> <span class="icon-key"></span><input
+						class="inp" type="text" id="pwdNueva2"
+						placeholder="Repita Contraseña" value="" name="mailTo"><br>
+					<button class="boton" id="sendEmailBtn" onclick="newPWD()"
+						value="Confirmar">Confirmar</button>
 				</div>
 			</article>
 		</div>
@@ -38,17 +37,32 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
-		function restablecer() {
+		function newPWD() {
+			var token = getParameterByName("code");
 			var p = {
-				userName : lUserName.value,
-				pwd : lPwd.value
+				pwd1 : pwdNueva1.value,
+				pwd2 : pwdNueva2.value,
+				token : token
 			};
-			$.post("/restablecer", p, function(respuesta, estado) {
+			$.post("/cambiarContraseña", p, function(respuesta, estado) {
 				if (estado == "success") {
-					window.location = "indexppt.html"
-					sessionStorage.userName = respuesta.userName;
+					window.location = "index.html";
+				} else {
+					alert("No se puede realizar el cambio");
 				}
 			});
+
+		}
+
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regexS = "[\\?&]" + name + "=([^&#]*)";
+			var regex = new RegExp(regexS);
+			var results = regex.exec(window.location.href);
+			if (results == null)
+				return "";
+			else
+				return decodeURIComponent(results[1].replace(/\+/g, " "));
 		}
 	</script>
 </body>

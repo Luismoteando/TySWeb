@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Restablecer contraseña</title>
+<link rel="stylesheet" href="Resources/styleRestablecer.css">
+<link rel="stylesheet" href="Resources/font.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="contenedor" data-ng-app="RestablecerApp"
+		data-ng-controller="RestablecerController">
+
+		<header>
+			<h1 class="title">Restablecer contraseña</h1>
+		</header>
+
+		<div class="restablecer">
+			<article class="fondo">
+				<h3>Restablezca su contraseña</h3>
+				<div>
+					<span class="icon-user"></span><input class="inp" type="text"
+						id="lUserName" placeholder="Usuario" value=""><br>
+					<button id="sendEmailBtn" onclick="recuperarPWD()">Recuperar</button>
+				</div>
+			</article>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		function recuperarPWD() {
+			var p = {
+				userName : lUserName.value
+			};
+			$.post("/solicitarToken", p, function(respuesta, estado) {
+				if (estado == "success") {
+					window.location = "index.html";
+				}
+			});
+		}
+	</script>
+</body>
+</html>

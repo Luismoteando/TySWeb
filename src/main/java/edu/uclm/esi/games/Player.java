@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.uclm.esi.mongolabels.dao.MongoBroker;
 import edu.uclm.esi.mongolabels.labels.Bsonable;
+import edu.uclm.esi.web.EmailSender;
 
 public class Player {
 	@Bsonable
@@ -28,7 +29,7 @@ public class Player {
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public String getFoto() {
 		return foto;
 	}
@@ -53,11 +54,11 @@ public class Player {
 	private void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 	public void setFoto(String path) {
 		this.foto = path;
 	}
-	
+
 	private void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
@@ -105,8 +106,23 @@ public class Player {
 	}
 
 	public static Player solicitarToken(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		Player player = null;
+		try {
+			BsonDocument criterion = new BsonDocument();
+			criterion.append("userName", new BsonString(userName));
+			player = (Player) MongoBroker.get().loadOne(Player.class, criterion);
+			player.createToken();
+		} catch (Exception e) {
+
+		}
+		return player;
+	}
+
+	private void createToken() throws Exception {
+		Token token = new Token(this.userName);
+		MongoBroker.get().insert(token);
+		EmailSender email = new EmailSender();
+		email.enviar(this.email, token.getValor());
 	}
 
 	public static Player identifyGoogle(String idGoogle, String nombre, String email) throws Exception {
@@ -114,7 +130,7 @@ public class Player {
 		criterio.append("idGoogle", new BsonString(idGoogle));
 		criterio.append("userName", new BsonString(nombre));
 		criterio.append("email", new BsonString(email));
-		criterio.append("tipo", new BsonString("Google")); 
+		criterio.append("tipo", new BsonString("Google"));
 		Player player = (Player) MongoBroker.get().loadOne(Player.class, criterio);
 		return player;
 	}
@@ -135,8 +151,28 @@ public class Player {
 			criterion.append("userName", new BsonString(this.userName));
 			BsonDocument result = MongoBroker.get().loadBinary("Fotos", criterion);
 			return result.getBinary("bytes").getData();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	public static boolean cambiarContraseña(String pwd1, String code) throws Exception {
+		boolean resultado = false;
+		BsonDocument criterion = new BsonDocument();
+		criterion.append("valor", new BsonString(code));
+		Player player = null;
+		Token token = null;
+		token = (Token) MongoBroker.get().loadOne(Token.class, criterion);
+		if (token.getCaducidad() < System.currentTimeMillis()) {
+			return resultado;
+		}
+		BsonDocument criterion2 = new BsonDocument();
+		criterion2.append("userName", new BsonString(token.getUserName()));
+		player = (Player) MongoBroker.get().loadOne(Player.class, criterion2);
+		MongoBroker.get().delete("Player", criterion2);
+		player.setPwd(pwd1);
+		MongoBroker.get().insert(player);
+		resultado = true;
+		return resultado;
 	}
 }

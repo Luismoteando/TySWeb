@@ -43,7 +43,7 @@
 						id="lUserName" placeholder="Usuario" value=""><br> <span
 						class="icon-key"></span><input class="inp" type="password"
 						id="lPwd" placeholder="Contraseña" value=""><br> <a
-						href="resetpassword.html" class="he">He olvidado mi contraseña</a>
+						href="recuperarPWD.html" class="he">He olvidado mi contraseña</a>
 					<button class="boton" onclick="login()">Iniciar sesión</button>
 				</div>
 				<br>
@@ -87,12 +87,12 @@
 			js.src = "https://connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-		
+
 		function checkLoginState() {
-			  FB.getLoginStatus(function(response) {
-			    alert(response);
-			  });
-			}
+			FB.getLoginStatus(function(response) {
+				alert(response);
+			});
+		}
 	</script>
 
 
@@ -104,7 +104,7 @@
 			};
 			$.post("/login", p, function(respuesta, estado) {
 				if (estado == "success") {
-					window.location = "elegirJuego.html"
+					window.location = "elegirJuego.html";
 					sessionStorage.userName = respuesta.userName;
 					/*sessionStorage.pwd = respuesta.pwd;*/
 					sessionStorage.pwd = lPwd.value;

@@ -20,58 +20,69 @@ import edu.uclm.esi.web.ws.WSServer;
 
 @RestController
 public class UserControllerPost {
-	
-	@RequestMapping(value = "/register", method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Player register(String email, String userName, String pwd1, String pwd2, String image) throws Exception {
 		if (!pwd1.equals(pwd2))
 			throw new Exception("Error: las contraseñas no coinciden");
-		Player player=Player.register(email, userName, pwd1, image);
-		if(player == null) 
+		Player player = Player.register(email, userName, pwd1, image);
+		if (player == null)
 			throw new Exception("Usuario ya registrado");
 		return player;
 	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Player loginPost(HttpSession session, String userName, String pwd) throws Exception {
-		Player player=Player.identify(userName, pwd);
+		Player player = Player.identify(userName, pwd);
 		session.setAttribute("player", player);
 		return player;
 	}
-	
-	@RequestMapping(value="/registrarOLoguear", method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE) 
+
+	@RequestMapping(value = "/registrarOLoguear", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Player loginConGoogle(HttpSession session, String idGoogle, String nombre, String email) throws Exception {
 		Player player = null;
 		try {
 			player = Player.identifyGoogle(idGoogle, nombre, email);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			player = Player.registerGoogle(idGoogle, nombre, email);
 		}
 		session.setAttribute("player", player);
 		return player;
 	}
-	
-	@RequestMapping(value="/solicitarToken", method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	  public Player solicitarToker(HttpSession session, String userName) throws Exception {
-	    return Player.solicitarToken(userName);
-	  }
-	
-	@RequestMapping(value= {"/joinGame", "/post/joinGame"}, method=RequestMethod.POST, consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE) 
+
+	@RequestMapping(value = "/solicitarToken", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public Player solicitarToker(HttpSession session, String userName) throws Exception {
+		return Player.solicitarToken(userName);
+	}
+
+	@RequestMapping(value = "/cambiarContraseña", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public boolean cambiarContraseña(String pwd1, String pwd2, String token) throws Exception {
+		boolean result;
+		if(!pwd1.equals(pwd2)) {
+			throw new Exception("Error: las contraseñas no coinciden");
+		}
+		result = Player.cambiarContraseña(pwd1, token);
+		return result;
+	}
+
+	@RequestMapping(value = { "/joinGame",
+			"/post/joinGame" }, method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Match joinGamePost(HttpSession session, @RequestBody String gameName) throws Exception {
-		Player player=(Player) session.getAttribute("player");
-		if (player==null)
+		Player player = (Player) session.getAttribute("player");
+		if (player == null)
 			throw new Exception("You need to be logged");
-		Match match=Manager.get().joinGame(player, gameName.substring(0, gameName.length()-1));
+		Match match = Manager.get().joinGame(player, gameName.substring(0, gameName.length() - 1));
 		WSServer.send(match.getPlayers(), match);
 		return match;
 	}
-	
-	@ExceptionHandler(Exception.class) 
+
+	@ExceptionHandler(Exception.class)
 	public ModelAndView handleError(HttpServletRequest req, Exception ex) {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("respuesta");
 		result.addObject("exception", ex);
 		result.setStatus(HttpStatus.UNAUTHORIZED);
-		
+
 		return result;
 	}
 }
