@@ -28,9 +28,9 @@
 		</header>
 
 		<div id="overlay">
-			<button id="join" class="boton "
+			<button id="join" class="boton"
 				onclick="joinGame('Destape de palabras')">Unirse al juego</button>
-			<button id="elegir" class="boton "
+			<button id="elegir" class="boton"
 				onclick="window.location.href='elegirJuego.html'">Elegir
 				juego</button>
 		</div>
@@ -142,8 +142,10 @@
 				</div>
 				<div id="chat" class="row" style="background: white; width: 95%;">
 					<div id="mensajes"></div>
-					<input id="mensaje" name="msg" type="text" id="msg" style="width:75%; margin-top:-50px;"/>
-					<button onclick="enviarMensaje()" class="btn" id="btn_send" style="margin-left:80%; margin-top: -40px;">Send</button>
+					<input id="mensaje" name="msg" type="text" id="msg"
+						style="width: 65%; margin-top: -50px; margin-left: 10%;" />
+					<button onclick="enviarMensaje()" class="btn" id="btn_send"
+						style="margin-left: 80%; margin-top: -40px;">Enviar</button>
 				</div>
 			</div>
 		</div>
@@ -160,23 +162,6 @@
 				login(userName, pwd);
 				mostrarJoin();
 			});
-
-			function ocultarPalabras() {
-				var i;
-
-				for (i = 0; i < 9; i++) {
-					document.getElementsByClassName("palabra")[i].src = "Resources/tapado.png"
-				}
-				generarPalabra();
-			}
-
-			function generarPalabra() {
-				var palabras = [ "Tijera", "Mano", "Piedra", "Mesa", "Zapato",
-						"Correo", "Metal", "Foto", "Papel" ];
-				var i = Math.floor((Math.random() * 8) + 0);
-				palabra = palabras[i];
-				document.getElementById("word").innerHTML = palabra;
-			}
 
 			function login(userName, pwd) {
 				var request = new XMLHttpRequest();
@@ -198,125 +183,15 @@
 
 							if (data.TYPE == "MATCH") {
 								add(JSON.stringify(data));
-								var player1 = data.players[0].userName;
-								var player2 = data.players[1].userName;
-								document.getElementById("p1").innerHTML = player1;
-								document.getElementById("p2").innerHTML = player2;
-
-								var winner = data.board.winner;
-								var tiradas1 = data.board.tiradas1;
-								var tiradas2 = data.board.tiradas2;
-								if (sessionStorage.userName == player1) {
-									if (winner != null) {
-										if (sessionStorage.userName == winner.userName) {
-											document.getElementById("winner").innerHTML = "¡Has ganado!";
-											var value = document
-													.getElementById("marcador1").innerHTML;
-											document
-													.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-											if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 1) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador2").innerHTML;
-												document
-														.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-											} else if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 0) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador1").innerHTML;
-												document
-														.getElementById("marcador1").innerHTML = parseInt(value) - 1;
-											}
-										} else {
-											document.getElementById("winner").innerHTML = "¡Has perdido!";
-											var value = document
-													.getElementById("marcador2").innerHTML;
-											document
-													.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-											if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 1) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador1").innerHTML;
-												document
-														.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-											} else if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 0) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador2").innerHTML;
-												document
-														.getElementById("marcador2").innerHTML = parseInt(value) - 1;
-											}
-										}
-										setTimeout(mostrarElegirJuego, 2000);
-									}
-								}
-
-								if (sessionStorage.userName == player2) {
-									if (winner != null) {
-										if (sessionStorage.userName == winner.userName) {
-											document.getElementById("winner").innerHTML = "¡Has ganado!";
-											var value = document
-													.getElementById("marcador2").innerHTML;
-											document
-													.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-											if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 1) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador1").innerHTML;
-												document
-														.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-											} else if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 0) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador2").innerHTML;
-												document
-														.getElementById("marcador2").innerHTML = parseInt(value) - 1;
-											}
-										} else {
-											document.getElementById("winner").innerHTML = "¡Has perdido!";
-											var value = document
-													.getElementById("marcador1").innerHTML;
-											document
-													.getElementById("marcador1").innerHTML = parseInt(value) + 1;
-											if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 1) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador2").innerHTML;
-												document
-														.getElementById("marcador2").innerHTML = parseInt(value) + 1;
-											} else if (tiradas1[0] == tiradas2[0]
-													&& tiradas1[0] == 0) {
-												document
-														.getElementById("winner").innerHTML = "¡Habéis empatado!";
-												var value = document
-														.getElementById("marcador1").innerHTML;
-												document
-														.getElementById("marcador1").innerHTML = parseInt(value) - 1;
-											}
-										}
-										setTimeout(mostrarElegirJuego, 2000);
-									}
-								}
+								mostrarResultado(data);
 							} else {
 								add("Mensaje desconocido");
 							}
 
 							if (data.TYPE == "MESSAGE") {
 								mostrarMensaje(data);
+							} else {
+								add("Mensaje desconocido");
 							}
 						}
 					}
@@ -325,9 +200,6 @@
 			}
 
 			function add(texto) {
-				/*var div = document.createElement("div");
-				resultado.appendChild(div);
-				div.innerHTML = texto;*/
 				console.log(texto);
 			}
 
@@ -361,15 +233,148 @@
 				ws.send(JSON.stringify(p));
 			}
 
+			function mostrarResultado(data) {
+				var player1 = data.players[0].userName;
+				var player2 = data.players[1].userName;
+				document.getElementById("p1").innerHTML = player1;
+				document.getElementById("p2").innerHTML = player2;
+
+				var winner = data.board.winner;
+				var tiradas1 = data.board.tiradas1;
+				var tiradas2 = data.board.tiradas2;
+				if (sessionStorage.userName == player1) {
+					if (winner != null) {
+						if (sessionStorage.userName == winner.userName) {
+							document.getElementById("winner").innerHTML = "¡Has ganado!";
+							var value = document.getElementById("marcador1").innerHTML;
+							document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+							if (tiradas1[0] == tiradas2[0] && tiradas1[0] == 1) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador2").innerHTML;
+								document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+							} else if (tiradas1[0] == tiradas2[0]
+									&& tiradas1[0] == 0) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador1").innerHTML;
+								document.getElementById("marcador1").innerHTML = parseInt(value) - 1;
+							}
+						} else {
+							document.getElementById("winner").innerHTML = "¡Has perdido!";
+							var value = document.getElementById("marcador2").innerHTML;
+							document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+							if (tiradas1[0] == tiradas2[0] && tiradas1[0] == 1) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador1").innerHTML;
+								document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+							} else if (tiradas1[0] == tiradas2[0]
+									&& tiradas1[0] == 0) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador2").innerHTML;
+								document.getElementById("marcador2").innerHTML = parseInt(value) - 1;
+							}
+						}
+						setTimeout(mostrarElegirJuego, 2000);
+					}
+				}
+
+				if (sessionStorage.userName == player2) {
+					if (winner != null) {
+						if (sessionStorage.userName == winner.userName) {
+							document.getElementById("winner").innerHTML = "¡Has ganado!";
+							var value = document.getElementById("marcador2").innerHTML;
+							document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+							if (tiradas1[0] == tiradas2[0] && tiradas1[0] == 1) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador1").innerHTML;
+								document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+							} else if (tiradas1[0] == tiradas2[0]
+									&& tiradas1[0] == 0) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador2").innerHTML;
+								document.getElementById("marcador2").innerHTML = parseInt(value) - 1;
+							}
+						} else {
+							document.getElementById("winner").innerHTML = "¡Has perdido!";
+							var value = document.getElementById("marcador1").innerHTML;
+							document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+							if (tiradas1[0] == tiradas2[0] && tiradas1[0] == 1) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador2").innerHTML;
+								document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+							} else if (tiradas1[0] == tiradas2[0]
+									&& tiradas1[0] == 0) {
+								document.getElementById("winner").innerHTML = "¡Habéis empatado!";
+								var value = document
+										.getElementById("marcador1").innerHTML;
+								document.getElementById("marcador1").innerHTML = parseInt(value) - 1;
+							}
+						}
+						setTimeout(mostrarElegirJuego, 2000);
+					}
+				}
+			}
+
+			function enviarMensaje() {
+				if (document.getElementById("mensaje").value != "") {
+					var p = {
+						TYPE : "MESSAGE",
+						userName : sessionStorage.userName,
+						message : document.getElementById("mensaje").value,
+						image : document.getElementById("imgFoto").src
+					};
+					ws.send(JSON.stringify(p));
+				}
+				document.getElementById("mensaje").value = "";
+			}
+
+			function mostrarMensaje(data) {
+				if (sessionStorage.userName == data.userName) {
+					document.getElementById("mensajes").innerHTML += "<div class='container darker' style='width: 80%;'><img src='"
+							+ data.image
+							+ "' alt='Avatar' class='right' style='width: 100%;'><p>"
+							+ data.message
+							+ "</p><span class='time-left'>11:01</span></div>";
+				} else {
+					document.getElementById("mensajes").innerHTML += "<div class='container' style='width: 80%;'><img src='"
+							+ data.image
+							+ "' alt='Avatar' class='left' style='width: 100%;'><p>"
+							+ data.message
+							+ "</p><span class='time-right'>11:01</span></div>";
+				}
+				setInterval(updateScroll, 500);
+			}
+
+			function generarPalabra() {
+				var palabras = [ "Tijera", "Mano", "Piedra", "Mesa", "Zapato",
+						"Correo", "Metal", "Foto", "Papel" ];
+				var i = Math.floor((Math.random() * 8) + 0);
+				palabra = palabras[i];
+				document.getElementById("word").innerHTML = palabra;
+			}
+		</script>
+
+		<script>
 			if (sessionStorage.getItem('userName') != null) {
 				document.getElementById("nombreU").innerHTML = sessionStorage
 						.getItem('userName');
 				try {
-					document.getElementById("usr").src = sessionStorage.getItem("image");
-					document.getElementById("imgFoto").src = sessionStorage.getItem("image");
-				} catch (e) {}
+					document.getElementById("usr").src = sessionStorage
+							.getItem("image");
+					document.getElementById("imgFoto").src = sessionStorage
+							.getItem("image");
+				} catch (e) {
+					alert("No has iniciado sesión");
+				}
 				cargarAvatar();
 			}
+
 			function cargarAvatar() {
 				var request = new XMLHttpRequest();
 				request.open("POST", "avatar.jsp");
@@ -407,37 +412,34 @@
 				document.getElementById("winner").innerHTML = "";
 				document.getElementById("word").style.display = "";
 			}
+
+			function ocultarPalabras() {
+				var i;
+
+				for (i = 0; i < 9; i++) {
+					document.getElementsByClassName("palabra")[i].src = "Resources/tapado.png"
+				}
+				generarPalabra();
+			}
+
 			function mostrarElegirJuego() {
 				document.getElementById("overlay").style.display = "block";
 				document.getElementById("join").style.display = "none";
 				document.getElementById("elegir").style.display = "inline-block";
 			}
-			function enviarMensaje() {
-				if (document.getElementById("mensaje").value != "") {
-					var p = {
-						TYPE : "MESSAGE",
-						userName : sessionStorage.userName,
-						message : document.getElementById("mensaje").value,
-						image : document.getElementById("imgFoto").src
-					};
-					ws.send(JSON.stringify(p));
-				}
+
+			function updateScroll() {
+				var mensajes = document.getElementById("mensajes");
+				mensajes.scrollTop = mensajes.scrollHeight;
 			}
-			function mostrarMensaje(data) {
-				if (sessionStorage.userName == data.userName) {
-					document.getElementById("mensajes").innerHTML += "<div class='container darker' style='width: 80%;'><img src='"
-							+ data.image
-							+ "' alt='Avatar' class='right' style='width: 100%;'><p>"
-							+ data.message
-							+ "</p><span class='time-left'>11:01</span></div>";
-				} else {
-					document.getElementById("mensajes").innerHTML += "<div class='container' style='width: 80%;'><img src='"
-							+ data.image
-							+ "' alt='Avatar' class='left' style='width: 100%;'><p>"
-							+ data.message
-							+ "</p><span class='time-right'>11:01</span></div>";
-				}
-			}
+
+			document.getElementById("mensaje").addEventListener("keyup",
+					function(event) {
+						event.preventDefault();
+						if (event.keyCode === 13) {
+							document.getElementById("btn_send").click();
+						}
+					});
 		</script>
 </body>
 </html>
