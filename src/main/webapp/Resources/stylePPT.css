@@ -295,3 +295,11 @@ form {
     width: 50%;
     margin: 0 0 0 -25%;
 }
+.player {		
+		margin-top: 120px;
+		
+	}
+
+@media screen and (max-width:992px) {
+	
+}
