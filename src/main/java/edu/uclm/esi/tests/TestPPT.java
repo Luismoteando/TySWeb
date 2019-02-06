@@ -78,6 +78,9 @@ public class TestPPT {
 	    driverAmanda.findElement(By.id("papel")).click(); 
 	    
 		Thread.sleep(5000);
+		
+	    assertTrue(driverLuismi.findElement(By.id("winner")).getText().equals("¡Has perdido!"));
+	    assertTrue(driverAmanda.findElement(By.id("winner")).getText().equals("¡Has ganado!"));
 	}
 
 	@After
