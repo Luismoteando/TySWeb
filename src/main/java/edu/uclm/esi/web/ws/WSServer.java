@@ -89,6 +89,7 @@ public class WSServer extends TextWebSocketHandler {
 		jsono.put("userName", jso.getString("userName"));
 		jsono.put("message", jso.getString("message"));
 		jsono.put("image", jso.getString("image"));
+		jsono.put("timestamp", jso.getString("timestamp"));
 
 		WebSocketMessage<?> message = new TextMessage(jsono.toString());
 
