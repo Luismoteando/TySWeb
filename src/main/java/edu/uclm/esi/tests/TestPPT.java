@@ -15,129 +15,75 @@ import org.openqa.selenium.support.ui.Select;
 import edu.uclm.esi.mongolabels.dao.MongoBroker;
 
 public class TestPPT {
-	private WebDriver driverPepe, driverAna;
-	private WebDriver driver;
+	private WebDriver driverLuismi, driverAmanda;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
 
 	public TestPPT() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\asg_9\\OneDrive\\Escritorio\\geckodriver.exe");
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\asg_9\\OneDrive\\Escritorio\\chromedriver.exe");
-
+		System.setProperty("webdriver.gecko.driver", "/Users/Luismi/geckodriver");
+		//System.setProperty("webdriver.chrome.driver", "/Users/Luismi/chromedriver");
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		driverPepe = new FirefoxDriver();
-		driverAna = new FirefoxDriver();
-		baseUrl = "https://www.katalon.com/";
-		driverPepe.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driverAna.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		BsonDocument criterion = new BsonDocument();
-		criterion.put("email", new BsonString("pepe@pepe.com"));
-		MongoBroker.get().delete("Player", criterion);
+		driverLuismi = new FirefoxDriver();
+		driverAmanda = new FirefoxDriver();
+		baseUrl = "http://localhost:8080/";
+		driverLuismi.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driverAmanda.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	public void testRegistrar() throws Exception {
-		driverPepe.get("http://localhost:8080/index.html");
-		driverPepe.findElement(By.linkText("Ir a ejemplos con JSON, POST y Angular")).click();
-
-		WebElement wePepe = driverPepe.findElement(By.id("email"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe@pepe.com");
-
-		wePepe = driverPepe.findElement(By.id("userName"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe");
-
-		wePepe = driverPepe.findElement(By.id("pwd1"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe123");
-
-		wePepe = driverPepe.findElement(By.id("pwd2"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe1234");
-
-		wePepe = driverPepe.findElement(By.xpath("//*[@id=\"divRegister\"]/div/button"));
-		wePepe.click();
-
-		Thread.sleep(2000);
-
-		wePepe = driverPepe.findElement(By.id("mensajeRegistro"));
-		String mensaje = wePepe.getText();
-
-		assertTrue(mensaje.toLowerCase().contains("error"));
-
-		wePepe = driverPepe.findElement(By.id("pwd2"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe123");
-
-		wePepe = driverPepe.findElement(By.xpath("//*[@id=\"divRegister\"]/div/button"));
-		wePepe.click();
-
-		Thread.sleep(2000);
-
-		wePepe = driverPepe.findElement(By.id("mensajeRegistro"));
-		mensaje = wePepe.getText();
-
-		assertTrue(mensaje.contains("OK"));
-	}
-
-	public void testLogin() throws Exception {
-		testRegistrar();
-
-		WebElement wePepe = driverPepe.findElement(By.id("userNameLogin"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe");
-
-		wePepe = driverPepe.findElement(By.id("pwdLogin"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe1234");
-
-		wePepe = driverPepe.findElement(By.id("btnLogin"));
-		wePepe.click();
-		Thread.sleep(200);
-		String mensaje = closeAlertAndGetItsText();
-		assertTrue(mensaje.equals("Error"));
-
-		wePepe = driverPepe.findElement(By.id("pwdLogin"));
-		wePepe.clear();
-		wePepe.sendKeys("pepe123");
-
-		wePepe = driverPepe.findElement(By.id("btnLogin"));
-		wePepe.click();
-		Thread.sleep(200);
-
-		wePepe = driverPepe.findElement(By.id("gamesList"));
-		assertTrue(wePepe.getText().contains("tictactoe"));
-		
-		//Logueamos a Ana
-		
-		driverAna.get("http://localhost:8080/index.html");
-		driverAna.findElement(By.linkText("Ir a ejemplos con JSON, POST y Angular")).click();
-		WebElement weAna = driverAna.findElement(By.id("userNameLogin"));
-		weAna.clear(); weAna.sendKeys("ana");
-		
-		weAna = driverAna.findElement(By.id("pwdLogin"));
-		weAna.clear(); weAna.sendKeys("ana123");
-		
-		weAna = driverAna.findElement(By.id("btnLogin"));
-		weAna.click();
-		Thread.sleep(2000);
+	@Test
+	public void mainTest() throws Exception {
+		driverLuismi.get("http://localhost:8080/index.html");
+		driverAmanda.get("http://localhost:8080/index.html");
+		testLogin();
+		testElegirJuego();
+		testJoinGame();
+		testPartida();
 	}
 	
-	@Test
-	public void testJoinGame () throws Exception {
-		testLogin();
+	public void testLogin() throws Exception {
+		driverLuismi.findElement(By.id("lUserName")).click();
+		driverAmanda.findElement(By.id("lUserName")).click();
+		driverLuismi.findElement(By.id("lUserName")).clear();
+		driverAmanda.findElement(By.id("lUserName")).clear();
+		driverLuismi.findElement(By.id("lUserName")).sendKeys("luismi");
+		driverAmanda.findElement(By.id("lUserName")).sendKeys("amanda");
 		
+		driverLuismi.findElement(By.id("lPwd")).click();
+		driverAmanda.findElement(By.id("lPwd")).click();
+		driverLuismi.findElement(By.id("lPwd")).clear();
+		driverAmanda.findElement(By.id("lPwd")).clear();
+		driverLuismi.findElement(By.id("lPwd")).sendKeys("luismi1234");
+		driverAmanda.findElement(By.id("lPwd")).sendKeys("amanda123");
+
+		driverLuismi.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='He olvidado mi contraseña'])[1]/following::button[1]")).click();
+		driverAmanda.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='He olvidado mi contraseña'])[1]/following::button[1]")).click();
+	}
+	
+	public void testElegirJuego() throws Exception {
+	    driverLuismi.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Elige un juego:'])[1]/following::button[1]")).click();
+	    driverAmanda.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Elige un juego:'])[1]/following::button[1]")).click();
+	}
+	
+	public void testJoinGame() throws Exception {
+	    driverLuismi.findElement(By.id("join")).click();
+	    driverAmanda.findElement(By.id("join")).click();
+	}
+	
+	public void testPartida() throws Exception {
+	    driverLuismi.findElement(By.id("piedra")).click();	
+	    driverAmanda.findElement(By.id("papel")).click(); 
+	    
+		Thread.sleep(5000);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		driverPepe.quit();
-		driverAna.quit();
+		driverLuismi.quit();
+		driverAmanda.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
@@ -146,8 +92,8 @@ public class TestPPT {
 
 	private boolean isElementPresent(By by) {
 		try {
-			driverPepe.findElement(by);
-			driverAna.findElement(by);
+			driverLuismi.findElement(by);
+			driverAmanda.findElement(by);
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
@@ -156,8 +102,8 @@ public class TestPPT {
 
 	private boolean isAlertPresent() {
 		try {
-			driverPepe.switchTo().alert();
-			driverAna.switchTo().alert();
+			driverLuismi.switchTo().alert();
+			driverAmanda.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
@@ -166,7 +112,7 @@ public class TestPPT {
 
 	private String closeAlertAndGetItsText() {
 		try {
-			Alert alert = driverPepe.switchTo().alert();
+			Alert alert = driverLuismi.switchTo().alert();
 			String alertText = alert.getText();
 			if (acceptNextAlert) {
 				alert.accept();
