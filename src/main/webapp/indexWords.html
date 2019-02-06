@@ -322,12 +322,16 @@
 			}
 
 			function enviarMensaje() {
+				var currentdate = new Date();
+				var timestamp = currentdate.getHours() + ":"
+						+ currentdate.getMinutes();
 				if (document.getElementById("mensaje").value != "") {
 					var p = {
 						TYPE : "MESSAGE",
 						userName : sessionStorage.userName,
 						message : document.getElementById("mensaje").value,
-						image : document.getElementById("imgFoto").src
+						image : document.getElementById("imgFoto").src,
+						timestamp : timestamp
 					};
 					ws.send(JSON.stringify(p));
 				}
@@ -340,13 +344,15 @@
 							+ data.image
 							+ "' alt='Avatar' class='right' style='width: 100%;'><p>"
 							+ data.message
-							+ "</p><span class='time-left'>11:01</span></div>";
+							+ "</p><span class='time-left'>"
+							+ data.timestamp + "</span></div>";
 				} else {
 					document.getElementById("mensajes").innerHTML += "<div class='container' style='width: 80%;'><img src='"
 							+ data.image
 							+ "' alt='Avatar' class='left' style='width: 100%;'><p>"
 							+ data.message
-							+ "</p><span class='time-right'>11:01</span></div>";
+							+ "</p><span class='time-right'>"
+							+ data.timestamp + "</span></div>";
 				}
 				setInterval(updateScroll, 500);
 			}
