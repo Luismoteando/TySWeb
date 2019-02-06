@@ -33,13 +33,16 @@ header h1{
 	font-size: 30px;
 }
 
-header a{
+.registrarse{
 	margin-right: 30px;
+	margin-left: 90%;
 	text-align: center;
 	text-decoration: none;
 	color: #fff;
 	font-size: 25px;
 	transition: all ease 300ms;
+	color: #fff;
+    font-size: 20px;
 }
 
 header a:hover{
@@ -166,4 +169,17 @@ header a:hover{
 
 .boton:hover{
   border: 120%;
+}
+
+@media only screen and (max-width: 1340px) {
+	.registrarse {margin-left: 88%;}
+}
+@media only screen and (max-width: 1130px) {
+	.registrarse {margin-left: 85%;}
+}
+@media only screen and (max-width: 900px) {
+	.registrarse {margin-left: 80%;}
+}
+@media only screen and (max-width: 700px) {
+	.registrarse {margin-left: 75%;}
 }
