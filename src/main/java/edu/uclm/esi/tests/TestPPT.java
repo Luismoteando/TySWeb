@@ -56,7 +56,7 @@ public class TestPPT {
 		driverAmanda.findElement(By.id("lPwd")).click();
 		driverLuismi.findElement(By.id("lPwd")).clear();
 		driverAmanda.findElement(By.id("lPwd")).clear();
-		driverLuismi.findElement(By.id("lPwd")).sendKeys("luismi1234");
+		driverLuismi.findElement(By.id("lPwd")).sendKeys("luismi123");
 		driverAmanda.findElement(By.id("lPwd")).sendKeys("amanda123");
 
 		driverLuismi.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='He olvidado mi contraseña'])[1]/following::button[1]")).click();

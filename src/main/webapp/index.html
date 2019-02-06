@@ -44,7 +44,7 @@
 						class="icon-key"></span><input class="inp" type="password"
 						id="lPwd" placeholder="Contraseña" value=""><br> <a
 						href="recuperarPWD.html" class="he">He olvidado mi contraseña</a>
-					<button class="boton" onclick="login()">Iniciar sesión</button>
+					<button id="btnLogin" class="boton" onclick="login()">Iniciar sesión</button>
 				</div>
 				<br>
 				<fb:login-button scope="public_profile,email"
@@ -136,6 +136,14 @@
 					+ email;
 			req.send(p);
 		}
+		
+		document.getElementById("lPwd").addEventListener("keyup",
+				function(event) {
+					event.preventDefault();
+					if (event.keyCode === 13) {
+						document.getElementById("btnLogin").click();
+					}
+				});
 	</script>
 </body>
 </html>
