@@ -44,9 +44,9 @@ public class EmailSender {
 		Session session = Session.getInstance(properties, auth);
 
 		MimeMessage msg = new MimeMessage(session);
-		msg.setSubject("LaOca2018 - recuperación de contraseña");
+		msg.setSubject("WebGames2019 | Recuperación de contraseña");
 		msg.setText(
-				"Pulsa en el siguiente enlace para crear una nueva contraseña: http://localhost:8080/newPWD.html?code="
+				"Haga click en el siguiente enlace para crear una nueva contraseña: http://localhost:8080/newPWD.html?code="
 						+ string + "&email=" + email);
 		msg.setFrom(new InternetAddress(this.remitente));
 		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
