@@ -154,6 +154,8 @@
 		<script>
 			var ws;
 			var palabra;
+			var palabras = [ "Tijera", "Mano", "Piedra", "Mesa", "Zapato",
+					"Correo", "Metal", "Foto", "Papel" ];
 
 			$(document).ready(function() {
 				var userName = sessionStorage.userName;
@@ -215,6 +217,7 @@
 				request.send();
 				ocultarJoin();
 				setTimeout(ocultarPalabras, 3000);
+				generarPalabra();
 			}
 
 			function check(selected) {
@@ -223,8 +226,12 @@
 				var coordinate;
 				if (palabra == selected) {
 					coordinate = 1;
+					generarPalabra();
 				} else {
 					coordinate = 0;
+					setTimeout(function() {
+						document.getElementById(selected).src = "Resources/tapado.png";
+					}, 3000);
 				}
 				var p = {
 					TYPE : "MOVEMENT",
@@ -358,10 +365,8 @@
 			}
 
 			function generarPalabra() {
-				var palabras = [ "Tijera", "Mano", "Piedra", "Mesa", "Zapato",
-						"Correo", "Metal", "Foto", "Papel" ];
-				var i = Math.floor((Math.random() * 8) + 0);
-				palabra = palabras[i];
+				var i = Math.floor((Math.random() * palabras.length) + 0);
+				palabra = palabras.splice(i, 1);
 				document.getElementById("word").innerHTML = palabra;
 			}
 		</script>
@@ -407,6 +412,7 @@
 				}
 				request.send("p=" + JSON.stringify(p));
 			}
+			
 			function mostrarJoin() {
 				document.getElementById("overlay").style.display = "block";
 				document.getElementById("join").style.display = "inline-block";
@@ -421,11 +427,9 @@
 
 			function ocultarPalabras() {
 				var i;
-
 				for (i = 0; i < 9; i++) {
-					document.getElementsByClassName("palabra")[i].src = "Resources/tapado.png"
+					document.getElementsByClassName("palabra")[i].src = "Resources/tapado.png";
 				}
-				generarPalabra();
 			}
 
 			function mostrarElegirJuego() {
@@ -440,12 +444,13 @@
 			}
 
 			document.getElementById("mensaje").addEventListener("keyup",
-					function(event) {
-						event.preventDefault();
-						if (event.keyCode === 13) {
-							document.getElementById("btn_send").click();
-						}
-					});
+				function(event) {
+					event.preventDefault();
+					if (event.keyCode === 13) {
+						document.getElementById("btn_send").click();
+					}
+				}
+			);
 		</script>
 </body>
 </html>

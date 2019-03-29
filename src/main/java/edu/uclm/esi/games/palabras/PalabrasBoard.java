@@ -10,17 +10,19 @@ public class PalabrasBoard extends Board{
 
 	public PalabrasBoard(PalabrasMatch palabrasMatch) {
 		super(palabrasMatch);
-		this.tiradas0 = new int[] {-1};
-		this.tiradas1 = new int[] {-1};
+		this.tiradas0 = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+		this.tiradas1 = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1};
 	}
 
 	@Override
 	public void move(Player player, int[] coordinates) throws Exception {
 		int pos;
-		if(this.match.getPlayers().get(0) == player) {
-			pos = rellenar(tiradas0, coordinates[0]);
-		} else {
-			pos = rellenar(tiradas1, coordinates[0]);
+		if(coordinates[0] == 1) {
+			if(this.match.getPlayers().get(0) == player) {
+				pos = rellenar(tiradas0, coordinates[0]);
+			} else {
+				pos = rellenar(tiradas1, coordinates[0]);
+			}
 		}
 	}
 
@@ -38,7 +40,7 @@ public class PalabrasBoard extends Board{
 	@Override
 	public Player getWinner() {
 		for(int i = 0; i < tiradas0.length; i++) {
-			if(tiradas0[i] == -1 || tiradas1[i] == -1) {
+			if(tiradas0[i] == -1 && tiradas1[i] == -1) {
 				return null;
 			}
 		}
@@ -79,7 +81,7 @@ public class PalabrasBoard extends Board{
 			return true;
 		}
 		for(int i = 0; i < tiradas0.length; i++) {
-			if(tiradas0[i] == -1 || tiradas1[i] == -1) {
+			if(tiradas0[i] == -1 && tiradas1[i] == -1) {
 				return false;
 			}
 		}
