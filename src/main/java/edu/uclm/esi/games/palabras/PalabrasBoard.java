@@ -52,7 +52,8 @@ public class PalabrasBoard extends Board{
 		for(int i = 0; i < tiradas0.length; i++) {
 			if(gana(tiradas0[i], tiradas1[i])) {
 				victorias0++;
-			} else {
+			}
+			if(gana(tiradas1[i], tiradas0[i])) {
 				victorias1++;
 			}
 		}
