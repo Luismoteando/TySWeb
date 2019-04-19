@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Piedra, Papel, Tijera</title>
 <link rel="stylesheet" href="Resources/stylePPT.css">
 <link rel="stylesheet" href="Resources/font.css">
 <link rel="stylesheet"
@@ -14,7 +14,7 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<body>
+<body style="height: 100%;">
 	<div class="contenedor" data-ng-app="pptApp"
 		data-ng-controller="pptController">
 
@@ -22,7 +22,7 @@
 			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías
 				y Sistemas Web</h1>
 			<img id="imgFoto" alt="User" width="40" height="40"
-				style="margin-left: 97%; margin-top: -55px; border-radius: 50%;">
+				style="margin-left: 94%; margin-top: -55px; border-radius: 50%;">
 			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
 				Usuario</p>
 		</header>
@@ -36,24 +36,24 @@
 		</div>
 
 		<div class="row" style="margin-right: 0px;">
-			<div class="col-md-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
 				<div class="ppt1">
 					<article class="fondo1">
 						<img id="usr" src="Resources/user.png" alt="User">
 						<div>
 							<div class="options">
-								<p style="font-size: 20px; margin-bottom: 20px;">Elige la
+								<p style="font-size: 18px; margin-bottom: 20px;">Elige la
 									opción que quieres jugar</p>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:move(0)"><input id="piedra"
 										type="image" src="Resources/piedra1.png" alt="Submit"
 										width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:move(1)"><input id="papel" type="image"
 										src="Resources/papel1.png" alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:move(2)"><input id="tijera"
 										type="image" src="Resources/tijera1.png" alt="Submit"
 										width="80" height="80"></a>
@@ -63,12 +63,12 @@
 								<p
 									style="font-size: 20px; margin-bottom: 20px; margin-left: 100px; padding-top: 100px;">
 									Resultado:</p>
-								<div class="col-md-6">
+								<div class="col-xs-6 col-sm-6 col-md-6">
 									<img id="tirada1" type="image" src="Resources/piedra1.png"
 										alt="Submit"
 										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; margin-left: 50px; display: none;">
 								</div>
-								<div class="col-md-6">
+								<div class="col-xs-6 col-sm-6 col-md-6">
 									<img id="tirada2" type="image" src="Resources/piedra1.png"
 										alt="Submit"
 										style="border-radius: 0%; width: 80px; height: 80px; margin-top: 5px; display: none;">
@@ -82,9 +82,9 @@
 				</div>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
 				<div class="row" style="height: 150px;">
-					<div class="col-md-6">
+					<div class="col-xs-6 col-sm-6 col-md-6">
 						<p id="p1"
 							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
 							Jugador 1:</p>
@@ -97,7 +97,7 @@
 							</g>
 						</svg>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-6 col-sm-6 col-md-6">
 						<p id="p2"
 							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
 							Jugador 2:</p>
@@ -114,9 +114,9 @@
 				<div id="chat" class="row" style="background: white; width: 95%;">
 					<div id="mensajes"></div>
 					<input id="mensaje" name="msg" type="text" id="msg"
-						style="width: 65%; margin-top: -50px; margin-left: 10%;" />
+						style="width: 65%; margin-top: -50px; margin-left: 5%;" />
 					<button onclick="enviarMensaje()" class="btn" id="btn_send"
-						style="margin-left: 80%; margin-top: -40px;">Enviar</button>
+						style="margin-left: 72%; margin-top: -40px;">Enviar</button>
 				</div>
 			</div>
 		</div>

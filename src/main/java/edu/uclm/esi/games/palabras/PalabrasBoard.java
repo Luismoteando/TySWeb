@@ -23,6 +23,12 @@ public class PalabrasBoard extends Board{
 			} else {
 				pos = rellenar(tiradas1, coordinates[0]);
 			}
+		} else {
+			if(this.match.getPlayers().get(0) == player) {
+				pos = rellenar(tiradas0, coordinates[0]);
+			} else {
+				pos = rellenar(tiradas1, coordinates[0]);
+			}
 		}
 	}
 

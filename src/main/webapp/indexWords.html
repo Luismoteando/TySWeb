@@ -14,7 +14,7 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<body>
+<body style="height: 100%;">
 	<div class="contenedor" data-ng-app="pptApp"
 		data-ng-controller="pptController">
 
@@ -22,7 +22,7 @@
 			<h1 class="title" style="margin: 10px 5px 0px 10px;">Tecnologías
 				y Sistemas Web</h1>
 			<img id="imgFoto" alt="User" width="40" height="40"
-				style="margin-left: 97%; margin-top: -55px; border-radius: 50%;">
+				style="margin-left: 94%; margin-top: -55px; border-radius: 50%;">
 			<p id="nombreU" style="margin-left: 80%; margin-top: -45px;">
 				Usuario</p>
 		</header>
@@ -36,7 +36,7 @@
 		</div>
 
 		<div class="row" style="margin-right: 0px;">
-			<div class="col-md-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
 				<div class="ppt1">
 					<article class="fondo1">
 						<img id="usr" src="Resources/user.png" alt="User">
@@ -44,51 +44,51 @@
 							<div class="options">
 								<p style="font-size: 20px; margin-bottom: 20px; color: #ffff;">Memoriza
 									estas palabras</p>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Mesa')"><input id="Mesa"
 										type="image" class="palabra" src="Resources/Mesa.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Piedra')"><input id="Piedra"
 										type="image" class="palabra" src="Resources/Piedra.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Tijera')"><input id="Tijera"
 										type="image" class="palabra" src="Resources/Tijera.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="options">
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Zapato')"><input id="Zapato"
 										type="image" class="palabra" src="Resources/Zapato.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Metal')"><input id="Metal"
 										type="image" class="palabra" src="Resources/Metal.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Mano')"><input id="Mano"
 										type="image" class="palabra" src="Resources/Mano.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
 							</div>
 							<div class="options">
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Correo')"><input id="Correo"
 										type="image" class="palabra" src="Resources/Correo.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Foto')"><input id="Foto"
 										type="image" class="palabra" src="Resources/Foto.png"
 										alt="Submit" width="80" height="80"></a>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4 col-sm-4 col-md-4">
 									<a href="javascript:check('Papel')"><input id="Papel"
 										type="image" class="palabra" src="Resources/Papel.png"
 										alt="Submit" width="80" height="80"></a>
@@ -111,9 +111,9 @@
 				</div>
 			</div>
 
-			<div class="col-md-6">
-				<div class="row" style="height: 150px;">
-					<div class="col-md-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
+				<div id ="m_row" class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6">
 						<p id="p1"
 							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
 							Jugador 1:</p>
@@ -126,10 +126,8 @@
 							</g>
 						</svg>
 					</div>
-					<div class="col-md-6">
-						<p id="p2"
-							style="margin-bottom: 0px; margin-top: 20px; font-size: 18px;">
-							Jugador 2:</p>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<p id="p2"> Jugador 2:</p>
 						<svg width="200" height="120">
 		  					<g>
 			  					<rect x="50" y="20" rx="20" ry="20" width="70" height="60"
@@ -140,12 +138,10 @@
 						</svg>
 					</div>
 				</div>
-				<div id="chat" class="row" style="background: white; width: 95%;">
+				<div id="chat" class="row">
 					<div id="mensajes"></div>
-					<input id="mensaje" name="msg" type="text" id="msg"
-						style="width: 65%; margin-top: -50px; margin-left: 10%;" />
-					<button onclick="enviarMensaje()" class="btn" id="btn_send"
-						style="margin-left: 80%; margin-top: -40px;">Enviar</button>
+					<input id="mensaje" name="msg" type="text" id="msg"/>
+					<button onclick="enviarMensaje()" class="btn" id="btn_send">Enviar</button>
 				</div>
 			</div>
 		</div>
@@ -190,6 +186,10 @@
 							} else {
 								add("Mensaje desconocido");
 							}
+							
+							if(data.TYPE == "MOVEMENT") {
+								
+							}
 
 							if (data.TYPE == "MESSAGE") {
 								mostrarMensaje(data);
@@ -232,7 +232,7 @@
 					coordinate = 0;
 					setTimeout(function() {
 						document.getElementById(selected).src = "Resources/tapado.png";
-					}, 3000);
+					}, 1000);
 				}
 				var p = {
 					TYPE : "MOVEMENT",
@@ -257,12 +257,18 @@
 				var winner = data.board.winner;
 				var tiradas1 = data.board.tiradas1;
 				var tiradas2 = data.board.tiradas2;
-				
 				document.getElementById("marcador1").innerHTML = 0;				
-				while(tiradas1[0] == 1) {
-					tiradas1.shift();
-					var value = document.getElementById("marcador1").innerHTML;
-					document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+				while(tiradas1[0] == 1 || tiradas1[0] == 0) {
+					if(tiradas1[0] == 1) {
+						var value = document.getElementById("marcador1").innerHTML;
+						document.getElementById("marcador1").innerHTML = parseInt(value) + 1;
+					} else {
+						var value = document.getElementById("marcador1").innerHTML;
+						if (parseInt(value) > 0) {
+							document.getElementById("marcador1").innerHTML = parseInt(value) - 1;
+						}
+					}
+					tiradas1.shift();	
 					
 				}
 				
@@ -278,10 +284,18 @@
 				}
 
 				document.getElementById("marcador2").innerHTML = 0;
-				while(tiradas2[0] == 1) {
+				while(tiradas2[0] == 1 || tiradas2[0] == 0) {
+					if(tiradas2[0] == 1) {
+						var value = document.getElementById("marcador2").innerHTML;
+						document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+					} else {
+						var value = document.getElementById("marcador2").innerHTML;
+						if(parseInt(value) > 0) {
+							document.getElementById("marcador2").innerHTML = parseInt(value) - 1;
+						}
+					}
 					tiradas2.shift();
-					var value = document.getElementById("marcador2").innerHTML;
-					document.getElementById("marcador2").innerHTML = parseInt(value) + 1;
+					
 					
 				}
 
