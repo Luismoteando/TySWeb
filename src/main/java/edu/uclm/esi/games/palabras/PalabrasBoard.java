@@ -5,13 +5,21 @@ import edu.uclm.esi.games.Match;
 import edu.uclm.esi.games.Player;
 
 public class PalabrasBoard extends Board{
-	
+
 	private int[] tiradas0, tiradas1;
 
 	public PalabrasBoard(PalabrasMatch palabrasMatch) {
 		super(palabrasMatch);
-		this.tiradas0 = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1};
-		this.tiradas1 = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+		this.tiradas0 = new int[45];
+		this.tiradas1 = new int[45];
+		inicializar();
+	}
+
+	private void inicializar() {
+		for(int i = 0; i < tiradas0.length; i++) {
+			tiradas0[i] = -1;
+			tiradas1[i] = -1;
+		}
 	}
 
 	@Override
@@ -39,22 +47,17 @@ public class PalabrasBoard extends Board{
 				return i;
 			}
 		}
-		
 		return -1;
 	}
 
 	@Override
 	public Player getWinner() {
-		for(int i = 0; i < tiradas0.length; i++) {
-			if(tiradas0[i] == -1 && tiradas1[i] == -1) {
-				return null;
-			}
-		}
 		return gana(tiradas0, tiradas1);
 	}
 
 	private Player gana(int[] tiradas0, int[] tiradas1) {
 		int victorias0 = 0, victorias1 = 0;
+		Player winner = null;
 		for(int i = 0; i < tiradas0.length; i++) {
 			if(gana(tiradas0[i], tiradas1[i])) {
 				victorias0++;
@@ -63,9 +66,14 @@ public class PalabrasBoard extends Board{
 				victorias1++;
 			}
 		}
-		return victorias0 > victorias1 ? this.match.getPlayers().get(0) : this.match.getPlayers().get(1);
+		if(victorias0 == 9) {
+			winner = this.match.getPlayers().get(0);
+		} else if(victorias1 == 9) {
+			winner = this.match.getPlayers().get(1);
+		}
+		return winner;
 	}
-	
+
 	private boolean gana(int tiradas0, int tiradas1) {
 		if(tiradas0 == 1) {
 			return true;
@@ -73,11 +81,11 @@ public class PalabrasBoard extends Board{
 			return false;
 		}
 	}
-	
+
 	public int[] getTiradas1() {
 		return tiradas0;
 	}
-	
+
 	public int[] getTiradas2() {
 		return tiradas1;
 	}

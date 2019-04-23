@@ -152,15 +152,12 @@
 			var palabra;
 			var palabras = [ "Tijera", "Mano", "Piedra", "Mesa", "Zapato",
 					"Correo", "Metal", "Foto", "Papel" ];
-
 			$(document).ready(function() {
 				var userName = sessionStorage.userName;
 				var pwd = sessionStorage.pwd;
-
 				login(userName, pwd);
 				mostrarJoin();
 			});
-
 			function login(userName, pwd) {
 				var request = new XMLHttpRequest();
 				request.open("GET", "http://localhost:8080/login?userName="
@@ -178,7 +175,6 @@
 						ws.onmessage = function(message) {
 							var data = message.data;
 							data = JSON.parse(data);
-
 							if (data.TYPE == "MATCH") {
 								add(JSON.stringify(data));
 								modificarMarcador(data);
@@ -186,11 +182,10 @@
 							} else {
 								add("Mensaje desconocido");
 							}
-							
-							if(data.TYPE == "MOVEMENT") {
-								
-							}
 
+							if(data.TYPE == "MOVEMENT") {
+
+							}
 							if (data.TYPE == "MESSAGE") {
 								mostrarMensaje(data);
 							} else {
@@ -201,11 +196,9 @@
 				};
 				request.send();
 			}
-
 			function add(texto) {
 				console.log(texto);
 			}
-
 			function joinGame(gameName) {
 				var request = new XMLHttpRequest();
 				request.open("GET", "http://localhost:8080/joinGame?gameName="
@@ -220,7 +213,6 @@
 				setTimeout(ocultarPalabras, 3000);
 				generarPalabra();
 			}
-
 			function check(selected) {
 				document.getElementById(selected).src = "Resources/" + selected
 						+ ".png";
@@ -240,24 +232,20 @@
 				};
 				ws.send(JSON.stringify(p));
 			}
-			
+
 			function modificarMarcador(data) {
 				var puntos1 = data.board.tiradas1;
 				var puntos2 = data.board.tiradas2;
-				
-
 			}
-
 			function mostrarResultado(data) {
 				var player1 = data.players[0].userName;
 				var player2 = data.players[1].userName;
 				document.getElementById("p1").innerHTML = player1;
 				document.getElementById("p2").innerHTML = player2;
-
 				var winner = data.board.winner;
 				var tiradas1 = data.board.tiradas1;
 				var tiradas2 = data.board.tiradas2;
-				document.getElementById("marcador1").innerHTML = 0;				
+				document.getElementById("marcador1").innerHTML = 0;
 				while(tiradas1[0] == 1 || tiradas1[0] == 0) {
 					if(tiradas1[0] == 1) {
 						var value = document.getElementById("marcador1").innerHTML;
@@ -268,10 +256,9 @@
 							document.getElementById("marcador1").innerHTML = parseInt(value) - 1;
 						}
 					}
-					tiradas1.shift();	
-					
+					tiradas1.shift();
 				}
-				
+
 				if (sessionStorage.userName == player1) {
 					if (winner != null) {
 						if (sessionStorage.userName == winner.userName) {
@@ -282,7 +269,6 @@
 						setTimeout(mostrarElegirJuego, 2000);
 					}
 				}
-
 				document.getElementById("marcador2").innerHTML = 0;
 				while(tiradas2[0] == 1 || tiradas2[0] == 0) {
 					if(tiradas2[0] == 1) {
@@ -295,10 +281,7 @@
 						}
 					}
 					tiradas2.shift();
-					
-					
 				}
-
 				if (sessionStorage.userName == player2) {
 					if (winner != null) {
 						if (sessionStorage.userName == winner.userName) {
@@ -310,7 +293,6 @@
 					}
 				}
 			}
-
 			function enviarMensaje() {
 				var currentdate = new Date();
 				var timestamp = currentdate.getHours() + ":"
@@ -327,7 +309,6 @@
 				}
 				document.getElementById("mensaje").value = "";
 			}
-
 			function mostrarMensaje(data) {
 				if (sessionStorage.userName == data.userName) {
 					document.getElementById("mensajes").innerHTML += "<div class='container darker' style='width: 80%;'><img src='"
@@ -346,7 +327,6 @@
 				}
 				setInterval(updateScroll, 500);
 			}
-
 			function generarPalabra() {
 				var i = Math.floor((Math.random() * palabras.length) + 0);
 				palabra = palabras.splice(i, 1);
@@ -368,7 +348,6 @@
 				}
 				cargarAvatar();
 			}
-
 			function cargarAvatar() {
 				var request = new XMLHttpRequest();
 				request.open("POST", "avatar.jsp");
@@ -384,7 +363,6 @@
 								var imagen = document.getElementById("imgFoto");
 								imagen.src = respuesta.avatar;
 								document.getElementById("usr").src = respuesta.avatar;
-
 							}
 						} catch (e) {
 						}
@@ -395,37 +373,32 @@
 				}
 				request.send("p=" + JSON.stringify(p));
 			}
-			
+
 			function mostrarJoin() {
 				document.getElementById("overlay").style.display = "block";
 				document.getElementById("join").style.display = "inline-block";
 				document.getElementById("elegir").style.display = "none";
 			}
-
 			function ocultarJoin() {
 				document.getElementById("overlay").style.display = "none";
 				document.getElementById("winner").innerHTML = "";
 				document.getElementById("word").style.display = "";
 			}
-
 			function ocultarPalabras() {
 				var i;
 				for (i = 0; i < 9; i++) {
 					document.getElementsByClassName("palabra")[i].src = "Resources/tapado.png";
 				}
 			}
-
 			function mostrarElegirJuego() {
 				document.getElementById("overlay").style.display = "block";
 				document.getElementById("join").style.display = "none";
 				document.getElementById("elegir").style.display = "inline-block";
 			}
-
 			function updateScroll() {
 				var mensajes = document.getElementById("mensajes");
 				mensajes.scrollTop = mensajes.scrollHeight;
 			}
-
 			document.getElementById("mensaje").addEventListener("keyup",
 				function(event) {
 					event.preventDefault();
