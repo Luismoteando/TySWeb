@@ -219,6 +219,8 @@
 				var coordinate;
 				if (palabra == selected) {
 					coordinate = 1;
+					$("a:has(input[id=" + palabra + "])").attr('disabled', 'disabled');
+					$("#" + palabra).attr('disabled','disabled');
 					generarPalabra();
 				} else {
 					coordinate = 0;

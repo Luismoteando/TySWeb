@@ -66,12 +66,25 @@ public class PalabrasBoard extends Board{
 				victorias1++;
 			}
 		}
-		if(victorias0 == 9) {
-			winner = this.match.getPlayers().get(0);
-		} else if(victorias1 == 9) {
-			winner = this.match.getPlayers().get(1);
+		int points0 = victorias0 - attempts(tiradas0);
+		int points1 = victorias1 - attempts(tiradas1);
+		if(victorias0 == 9 || victorias1 == 9) {
+			if(points0 > points1) {
+				winner = this.match.getPlayers().get(0);
+			} else {
+				winner = this.match.getPlayers().get(1);
+			}
 		}
 		return winner;
+	}
+	
+	private int attempts(int[] tiradas) {
+		for(int i = 0; i < tiradas.length; i++) {
+			if(tiradas[i] == -1) {
+				return i;
+			}
+		}
+		return tiradas.length;
 	}
 
 	private boolean gana(int tiradas0, int tiradas1) {
