@@ -47,6 +47,7 @@ public class PalabrasBoard extends Board{
 				return i;
 			}
 		}
+		
 		return -1;
 	}
 
@@ -57,25 +58,35 @@ public class PalabrasBoard extends Board{
 
 	private Player gana(int[] tiradas0, int[] tiradas1) {
 		int victorias0 = 0, victorias1 = 0;
+		int points0 = 0, points1 = 0;
 		Player winner = null;
-		for(int i = 0; i < tiradas0.length; i++) {
-			if(gana(tiradas0[i], tiradas1[i])) {
-				victorias0++;
-			}
-			if(gana(tiradas1[i], tiradas0[i])) {
-				victorias1++;
-			}
-		}
-		int points0 = victorias0 - attempts(tiradas0);
-		int points1 = victorias1 - attempts(tiradas1);
-		if(victorias0 == 9 || victorias1 == 9) {
+		
+		victorias0 = hits(tiradas0);
+		victorias1 = hits(tiradas1);
+		points0 = victorias0 - attempts(tiradas0);
+		points1 = victorias1 - attempts(tiradas1);
+		
+		if(victorias0 == 9 && victorias1 == 9) {
 			if(points0 > points1) {
 				winner = this.match.getPlayers().get(0);
 			} else {
 				winner = this.match.getPlayers().get(1);
 			}
 		}
+		
 		return winner;
+	}
+	
+	private int hits(int[] tiradas) {
+		int victorias = 0;
+		
+		for(int i = 0; i < tiradas.length; i++) {
+			if(tiradas[i] == 1) {
+				victorias++;
+			}
+		}
+		
+		return victorias;
 	}
 	
 	private int attempts(int[] tiradas) {
@@ -85,14 +96,6 @@ public class PalabrasBoard extends Board{
 			}
 		}
 		return tiradas.length;
-	}
-
-	private boolean gana(int tiradas0, int tiradas1) {
-		if(tiradas0 == 1) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public int[] getTiradas1() {
@@ -108,11 +111,13 @@ public class PalabrasBoard extends Board{
 		if(this.getWinner() != null) {
 			return true;
 		}
+		
 		for(int i = 0; i < tiradas0.length; i++) {
 			if(tiradas0[i] == -1 && tiradas1[i] == -1) {
 				return false;
 			}
 		}
+		
 		return true;
 	}
 
